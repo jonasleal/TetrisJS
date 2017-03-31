@@ -3,11 +3,58 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            #divPrincipal{
+                background: black;
+                width:300px;
+                height:500px;
+            }
+        </style>
     </head>
     <body>
-        <h1>Hello World!</h1>
+
         <script>
             
+
         </script>
+        <script>
+            var Quadrado = function (x, y) {
+                var centroX = x;
+                var centroY = y;
+                var tamanho = 30;
+
+                var div1 = document.createElement("div");
+                div1.setAttribute("style", "width:" + tamanho + "px;height:" + tamanho
+                        + "px;background:yellow;top:" + (centroY) + "px;left:" + (centroX)
+                        + "px;position:absolute");
+                var div2 = document.createElement("div");
+                div2.setAttribute("style", "width:" + tamanho + "px;height:" + tamanho
+                        + "px;background:yellow;top:" + (centroY + tamanho) + "px;left:" + (centroX)
+                        + "px;position:absolute");
+                var div3 = document.createElement("div");
+                div3.setAttribute("style", "width:" + tamanho + "px;height:" + tamanho
+                        + "px;background:yellow;top:" + (centroY) + "px;left:" + (centroX + tamanho)
+                        + "px;position:absolute");
+                var div4 = document.createElement("div");
+                div4.setAttribute("style", "width:" + tamanho + "px;height:" + tamanho
+                        + "px;background:yellow;top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
+                        + "px;position:absolute");
+            };
+            Quadrado.prototype.mostrar = function () {
+                var div = document.getElementById("divPrincipal");
+                div.appendChild(div1);
+            };
+            
+            var quadrado = new Quadrado(100, 100);
+            quadrado.prototype.mostrar();
+        </script>
+        <div id="divPrincipal" >
+
+        </div>
+        <div style="background: blue; width:30px;height:30px;">
+
+
+        </div>
+
     </body>
 </html>
