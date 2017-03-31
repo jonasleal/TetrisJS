@@ -5,19 +5,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
             #divPrincipal{
-                background: black;
+                background: gainsboro;
                 width:300px;
                 height:500px;
+
             }
         </style>
     </head>
     <body>
 
-        <script src="js/Quadrado.js"></script>
-        <script>
-            var quadrado = new Quadrado();
-            quadrado.prototype.mostrar();
-        </script>
+
         <div id="divPrincipal" >
 
         </div>
@@ -25,6 +22,12 @@
 
 
         </div>
+        <script src="js/Quadrado.js">
 
+        </script>
+        <script>
+            var quadrado = new Quadrado(200, 200);
+            quadrado.mostrar();
+        </script>
     </body>
 </html>
