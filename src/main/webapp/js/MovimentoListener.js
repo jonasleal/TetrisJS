@@ -6,15 +6,15 @@
 document.addEventListener("keydown", function (e) {
     //Esquerda
     if (e.keyCode === 37) {
-        tetraminos.moverEsquerda();
+        tetramino.moverEsquerda();
     } else
     //Direita
     if (e.keyCode === 39) {
-        tetraminos.moverDireita();
+        tetramino.moverDireita();
     } else
     //Baixo
     if (e.keyCode === 40) {
-        tetraminos.moverBaixo();
+        tetramino.moverBaixo();
     }
 });
 
