@@ -9,24 +9,25 @@ T = function(x,y){
     var centroX = x;
     var centroY = y;
     var tamanho = 30;
+    var cor ="purple";
     
     //Div 1 será a peça do meio e a peça de movimento
     var div1 = document.createElement("div");
-    div1.setAttribute("style","width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:purple;top:"+
+    div1.setAttribute("style","width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:"+cor+";top:"+
             (centroY)+"px;left:"+(centroX)+"px;position:absolute;border: solid 1px");
     
     var div2 = document.createElement("div");
-    div2.setAttribute("style","width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:purple;top:"+
+    div2.setAttribute("style","width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:"+cor+";top:"+
             (centroY+tamanho)+"px;left:"+(centroX)+"px;position:absolute;border: solid 1px");
     
     var div3 = document.createElement("div");
     
-    div3.setAttribute("style","width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:purple;top:"+
+    div3.setAttribute("style","width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:"+cor+";top:"+
             (centroY)+"px;left:"+(centroX-tamanho)+"px;position:absolute;border: solid 1px");
     
     var div4= document.createElement("div");
     
-    div4.setAttribute("style", "width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:purple;top:"+
+    div4.setAttribute("style", "width:"+(tamanho-1)+"px;height:"+(tamanho-1)+"px;background:"+cor+";top:"+
             (centroY)+"px;left:"+(centroX+tamanho)+"px;position:absolute;border: solid 1px");
     
     
