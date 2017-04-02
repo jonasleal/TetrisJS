@@ -43,6 +43,86 @@ this.mostrar=function () {
     div.appendChild(div4); 
     
 };
+this.moverEsquerda = function () {
+        
+    centroX = centroX - tamanho;
+    
+    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
+            + "px;position:absolute;border: solid 1px;");
+
+    };
+
+    this.moverDireita = function () {
+        
+        centroX = centroX + tamanho;
+        
+        
+    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
+            + "px;position:absolute;border: solid 1px;");
+
+    };
+
+    this.moverBaixo = function () {
+        
+        centroY = centroY + tamanho;
+        
+        
+    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
+            + "px;position:absolute;border: solid 1px;");
+    
+    
+    div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
+            + "px;position:absolute;border: solid 1px;");
+
+    };
+
+    this.rodar = function () {
+
+    };
 };
 
 
