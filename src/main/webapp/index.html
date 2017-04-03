@@ -18,16 +18,40 @@
         <div id="divPrincipal" >
 
         </div>
-        <div style="background: blue; width:30px;height:30px;">
-
-
-        </div>
         <script src="js/Quadrado.js">
 
         </script>
+        <script src = "Js/S.js">
+            
+        </script>
+        <script src = "Js/L.js">
+            
+        </script>
+        
+       
         <script>
-            var quadrado = new Quadrado(200, 200);
-            quadrado.mostrar();
+            var l = new L(100, 250);
+            l.mostrar();
+            
+            document.addEventListener("keydown", function(e){
+                if(e.keyCode===37){
+                    
+                    l.mostrar();
+                    l.moverEsquerda();
+            
+                    
+                }else
+                if(e.keyCode===39){
+                    l.mostrar();
+                    l.moverDireita();
+                
+                }else
+                if(e.keyCode===40){
+                    l.mostrar();
+                    l.moverBaixo();
+            }
+            });
+           
         </script>
     </body>
 </html>
