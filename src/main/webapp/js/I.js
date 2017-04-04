@@ -99,9 +99,12 @@ I = function (x, y) {
 
 
     };
-
-
-
+    
+    
+    this.rodar = function(){
+     
+        
+    };
 };
 
 
