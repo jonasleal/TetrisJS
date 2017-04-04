@@ -10,7 +10,6 @@ Quadrado = function (x, y) {
     var cor = "yellow";
 
 
-    var div = document.createElement("dir");
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
     var div3 = document.createElement("div");
@@ -22,8 +21,8 @@ Quadrado = function (x, y) {
     div2.setAttribute("style", css);
     div3.setAttribute("style", css);
     div4.setAttribute("style", css);
-    
- 
+
+
 
 
     this.mostrar = function () {
@@ -43,27 +42,41 @@ Quadrado = function (x, y) {
         var celula = tabela.getElementsByTagName("td");
 
         if (centroX > 0 && centroY < 14) {
-            if(celula[(centroX -1) + (centroY)*10]){
-                
-            this.mostrar();
+            child = celula[centroX - 1 + (centroY * 10)].childElementCount;
+            child = child + celula[centroX - 11 + (centroY * 10)].childElementCount;
+            if (child === 0) {
+                centroX = centroX - 1;
+                this.mostrar();
             }
-            
+
         }
 
     };
 
     this.moverDireita = function () {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celula = tabela.getElementsByTagName("td");
         if (centroX < 8 && centroY < 14) {
-            centroX = centroX + 1;
-            this.mostrar();
+            child = celula[centroX + 2 + (centroY * 10)].childElementCount;
+            child = child + celula[centroX - 8 + (centroY * 10)].childElementCount;
+            if (child === 0) {
+                centroX = centroX + 1;
+                this.mostrar();
+            }
         }
 
     };
 
     this.moverBaixo = function () {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celula = tabela.getElementsByTagName("td");
         if (centroY < 14) {
-            centroY = centroY + 1;
-            this.mostrar();
+            child = celula[centroX + (centroY * 10)+10].childElementCount;
+            child = child + celula[centroX + 1 + (centroY * 10)+10].childElementCount;
+            if (child === 0) {
+                centroY = centroY + 1;
+                this.mostrar();
+            }
         }
 
     };
