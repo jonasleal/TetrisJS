@@ -122,6 +122,9 @@ this.moverEsquerda = function () {
 
     this.rodar = function () {
 
+        if(div1.getAttribute("top") ){
+            
+        }
     };
 };
 

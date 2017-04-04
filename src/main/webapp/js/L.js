@@ -119,7 +119,7 @@ this.mostrar=function () {
 
     this.rodar = function () {
        
-        if(div1.getAttribute("style:top") === (div3.getAttribute("style:top") - (tamanho/2) ) && div1.getAttribute("style:left") === div3.getAttribute("style:left")){
+        if(div1.getAttribute("top") === (div3.getAttribute("top") - (tamanho/2) ) && div1.getAttribute("left") === div3.getAttribute("left")){
             
             div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
             + "px;background:"+ cor +";top:" + (div1.getAttribute("top") + (tamanho* 2)) + "px;left:" + (div1.getAttribute("left") + (tamanho * 2))
