@@ -3,55 +3,57 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <style>
-            #divPrincipal{
-                background: gainsboro;
-                width:300px;
-                height:500px;
-
-            }
-        </style>
+        <script src="js/MovimentoListener.js"></script>
+        <script src="js/Posicao.js"></script>
+        <script src="js/Cenario.js"></script>
+        <script src="js/Quadrado.js"></script>
+        <script src = "js/T.js"></script>
+        <script src ="js/I.js"></script>
+        <script src="js/L.js"></script>
+        <script src="js/S.js"></script>
         
     </head>
     <body>
 
 
-        <div id="divPrincipal" >
 
-        </div>
-<<<<<<< HEAD
-        
 
-        <script src="js/MovimentoListener.js"></script>
-        <script src="js/Quadrado.js"></script>
         <script>
-            var tetramino = new Quadrado(200, 200);
+            var cenario = new Cenario();
+            var tetramino = new Quadrado(0 ,0);
+            
             tetramino.mostrar();
-            tetramino.posiciona(100 , 100);
-             
+            var s = new S(300,300);
+            s.mostrar();
+//            var i = new I(220,100);
+//            i.mostrar();
+//            var l = new L(70,100);
+//            l.mostrar();
+//            var t = new T(250,130);
+//            t.mostrar();
+            //            var x = 0;
+            //            var y = 0;
+            //            interacao = function () {
+            //                x = x + 30;
+            //                y = y + 30;
+            //                var divInterno = document.getElementById("divInterno");
+            //                divInterno.setAttribute("style", "background:blue; top:" + y + "px; left:" + x + "px; width:30px; height:30px; border:solid black 1px;");
+            //
+            //            };
+            //            setInterval(interacao(), 1);
+            //            var tetramino = new Quadrado(200, 200);
+            //            tetramino.mostrar();
+            //
+            //            var l = new L(400, 400);
+            //
+            //            var t = new T(500, 500);
+            //            t.mostrar();
+            //
+            //            var i = new I(100, 100);
+            //            i.mostrar();
 
-
-
-
-=======
-      
-        <script src="js/Quadrado.js">
 
         </script>
-        
-        <script src = "js/T.js"></script>
-        <script src ="js/I.js"></script>
-        <script>
-            var quadrado = new Quadrado(200, 200);
-            quadrado.mostrar();
-            
-            var t =  new T(500,500);
-            t.mostrar();
-            
-            var i = new I(100,100);
-            i.mostrar();
-            
->>>>>>> 2b784d6d7ade93d0291a561557fa0ce49533a19f
-        </script>
+
     </body>
 </html>
