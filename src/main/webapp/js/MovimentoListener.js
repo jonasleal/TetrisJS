@@ -16,8 +16,12 @@ document.addEventListener("keydown", function (e) {
     if (e.keyCode === 40) {
         tetramino.moverBaixo();
     }else
-    if(e.keyCode === 32){
+    //Rodar
+     if(e.keyCode === 32){
         tetramino.rodar();
     }
+    
+    
+    
 });
 
