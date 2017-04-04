@@ -7,16 +7,23 @@ Posicao = function (_css){
     var css = _css;
    
     this.getTop = function (){
-        return css.split("width:")[1].split("px")[0];
+        var temp = removeEspaco();
+        return temp.split("width:")[1].split("px")[0];
     };
     
     this.getLeft = function (){
-        return css.split("left:")[1].split("px")[0];
+        var temp = removeEspaco();
+        return temp.split("left:")[1].split("px")[0];
     };
     
     
     this.getCss = function (){
         return css;
+    };
+    
+    removeEspaco = function (){
+        var temp = css;
+        return temp.split(" ");
     };
 
 };
