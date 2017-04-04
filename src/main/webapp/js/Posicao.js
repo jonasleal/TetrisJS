@@ -8,7 +8,7 @@ Posicao = function (_css){
    
     this.getTop = function (){
         var temp = removeEspaco();
-        return temp.split("width:")[1].split("px")[0];
+        return temp.split("top:")[1].split("px")[0];
     };
     
     this.getLeft = function (){
