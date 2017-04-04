@@ -16,8 +16,6 @@
     <body>
 
 
-
-
         <script>
             var cenario = new Cenario();
             var tetramino = new Quadrado(0 ,0);
@@ -54,6 +52,44 @@
 
 
         </script>
+
+        <script src="js/Quadrado.js">
+
+        </script>
+        <script src = "Js/S.js">
+            
+        </script>
+        <script src = "Js/L.js">
+            
+        </script>
+        
+       
+        <script>
+            var l = new L(100, 250);
+            l.mostrar();
+            
+            document.addEventListener("keydown", function(e){
+                if(e.keyCode===37){
+                    
+                    l.mostrar();
+                    l.moverEsquerda();
+
+                    
+                }else
+                if(e.keyCode===39){
+                    l.mostrar();
+                    l.moverDireita();
+                
+                }else
+                if(e.keyCode===40){
+                    l.mostrar();
+                    l.moverBaixo();
+            }
+            });
+           
+
+      </script>
+        
 
     </body>
 </html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            #divPrincipal{
+                background: gainsboro;
+                width:300px;
+                height:500px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <div id="divPrincipal"></div>
+
+
+        <script src ="js/I.js"></script>
+        <script src = "js/T.js"></script>
+        <script src ="js/MovimentoListener.js"></script>
+
+        <script>
+            var i = new I(100,100);
+            var t = new T(200,200);
+            i.mostrar();
+            t.mostrar();
+        document.addEventListener("keydown", function (e) {
+                
+                if (e.keyCode === 37) {
+                    i.mostrar();
+                    i.moverEsquerda();
+                    
+                    t.mostrar();
+                    t.moverEsquerda();
+                    
+                } else
+                //Direita
+                if (e.keyCode === 39) {
+                    i.mostrar();
+                    i.moverDireita();
+                    
+                    t.mostrar();
+                    t.moverDireita();
+                } else
+                //Baixo
+                if (e.keyCode === 40) {
+                    i.mostrar();
+                    i.moverBaixo();
+                    
+                    t.mostrar();
+                    t.moverBaixo();
+                }
+
+
+
+            });
+
+        </script>
+
+
+    </body>
+</html>

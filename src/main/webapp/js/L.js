@@ -118,7 +118,27 @@ this.mostrar=function () {
     };
 
     this.rodar = function () {
-
+       
+        if(div1.getAttribute("top") === (div3.getAttribute("top") - (tamanho/2) ) && div1.getAttribute("left") === div3.getAttribute("left")){
+            
+            div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (div1.getAttribute("top") + (tamanho* 2)) + "px;left:" + (div1.getAttribute("left") + (tamanho * 2))
+            + "px;position:absolute;border: solid 1px;");
+        }
+        
+        if(div2.getAttribute("top") === (div3.getAttribute("top") - tamanho) && div2.getAttribute("left") === div3.getAttribute("left") ){
+            
+            div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (div2.getAttribute("top") + tamanho) + "px;left:" + (div2.getAttribute("left") + tamanho)
+            + "px;position:absolute;border: solid 1px;");
+        }
+        
+        if(div4.getAttribute("top") === div3.getAttribute("top") && div4.getAttribute("left") === (div3.getAttribute("left") + tamanho) ){
+            
+            div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (div4.getAttribute("") + tamanho) + "px;left:" + (div4.getAttribute("left") - tamanho)
+            + "px;position:absolute;border: solid 1px;");
+        }
     };
     
 };
