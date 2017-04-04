@@ -9,25 +9,43 @@ L = function (x, y){
     var centroY = y;
     var tamanho = 30;
     var cor = "orange";
-
+    
+    var xdiv1 = 0, ydiv1 = 0, xdiv2 = 0, ydiv2 = 0, xdiv3 = 0, ydiv3 = 0, xdiv4 = 0, ydiv4 = 0; 
+    
     var div1 = document.createElement("div");
+    
+    ydiv1 = centroY;
+    xdiv1 = centroX;
+    
     div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv1) + "px;left:" + (xdiv1)
             + "px;position:absolute;border: solid 1px;");
     
     var div2 = document.createElement("div");
+    
+    ydiv2 = centroY + tamanho;
+    xdiv2 = centroX;
+    
     div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv2) + "px;left:" + (xdiv2)
             + "px;position:absolute;border: solid 1px;");
     
     var div3 = document.createElement("div");
+    
+    ydiv3 = centroY + (tamanho * 2);
+    xdiv3 = centroX;
+    
     div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv3) + "px;left:" + (xdiv3)
             + "px;position:absolute;border: solid 1px;");
     
     var div4 = document.createElement("div");
+    
+    ydiv4 = centroY + (tamanho * 2);
+    xdiv4 = centroX + tamanho;
+    
     div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+cor+";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
+            + "px;background:"+cor+";top:" + (ydiv4) + "px;left:" + (xdiv4)
             + "px;position:absolute;border: solid 1px;");
 
     
@@ -45,24 +63,28 @@ this.mostrar=function () {
         
         centroX = centroX - tamanho;
         
-        
+    ydiv1 = centroY;
+    xdiv1 = centroX;
     div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv1) + "px;left:" + (xdiv1)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv2 = centroY + tamanho;
+    xdiv2 = centroX;
     div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv2) + "px;left:" + (xdiv2)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv3 = centroY +(tamanho * 2);
+    xdiv3 = centroX;
     div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv3) + "px;left:" + (xdiv3)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv4 = centroY + (tamanho * 2);
+    xdiv4 = centroX + tamanho;
     div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+cor+";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
+            + "px;background:"+cor+";top:" + (ydiv4) + "px;left:" + (xdiv4)
             + "px;position:absolute;border: solid 1px;");
 
     };
@@ -71,23 +93,28 @@ this.mostrar=function () {
         
         centroX = centroX + tamanho;
         
-        div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
+    ydiv1 = centroY;
+    xdiv1 = centroX;
+    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (ydiv1) + "px;left:" + (xdiv1)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv2 = centroY + tamanho;
+    xdiv2 = centroX;
     div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv2) + "px;left:" + (xdiv2)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv3 = centroY +(tamanho * 2);
+    xdiv3 = centroX;
     div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv3) + "px;left:" + (xdiv3)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv4 = centroY + (tamanho * 2);
+    xdiv4 = centroX + tamanho;
     div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+cor+";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
+            + "px;background:"+cor+";top:" + (ydiv4) + "px;left:" + (xdiv4)
             + "px;position:absolute;border: solid 1px;");
 
     };
@@ -96,47 +123,56 @@ this.mostrar=function () {
         
         centroY = centroY + tamanho;
         
-       div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
+    ydiv1 = centroY;
+    xdiv1 = centroX;
+    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (ydiv1) + "px;left:" + (xdiv1)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv2 = centroY + tamanho;
+    xdiv2 = centroX;
     div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv2) + "px;left:" + (xdiv2)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv3 = centroY +(tamanho * 2);
+    xdiv3 = centroX;
     div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX)
+            + "px;background:"+ cor +";top:" + (ydiv3) + "px;left:" + (xdiv3)
             + "px;position:absolute;border: solid 1px;");
     
-    
+    ydiv4 = centroY + (tamanho * 2);
+    xdiv4 = centroX + tamanho;
     div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+cor+";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
+            + "px;background:"+cor+";top:" + (ydiv4) + "px;left:" + (xdiv4)
             + "px;position:absolute;border: solid 1px;");
+
 
     };
 
     this.rodar = function () {
        
-        if(div1.getAttribute("style:top") === (div3.getAttribute("style:top") - (tamanho/2) ) && div1.getAttribute("style:left") === div3.getAttribute("style:left")){
+      
+       
+       
+       if(ydiv1 === (ydiv3 - (tamanho * 2) ) && xdiv1 === xdiv3){
             
             div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (div1.getAttribute("top") + (tamanho* 2)) + "px;left:" + (div1.getAttribute("left") + (tamanho * 2))
+            + "px;background:"+ cor +";top:" + (ydiv1 + (tamanho * 2)) + "px;left:" + (xdiv1 + (tamanho * 2))
+            + "px;position:absolute;border: solid 1px;");
+        }
+       
+        if(ydiv2 === (ydiv3 - tamanho) && xdiv2 === xdiv3 ){
+            
+            div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (ydiv2 + tamanho) + "px;left:" + (xdiv2 + tamanho)
             + "px;position:absolute;border: solid 1px;");
         }
         
-        if(div2.getAttribute("top") === (div3.getAttribute("top") - tamanho) && div2.getAttribute("left") === div3.getAttribute("left") ){
+        if(ydiv4 === ydiv3 && xdiv4 === (xdiv3 + tamanho) ){
             
-            div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (div2.getAttribute("top") + tamanho) + "px;left:" + (div2.getAttribute("left") + tamanho)
-            + "px;position:absolute;border: solid 1px;");
-        }
-        
-        if(div4.getAttribute("top") === div3.getAttribute("top") && div4.getAttribute("left") === (div3.getAttribute("left") + tamanho) ){
-            
-            div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (div4.getAttribute("") + tamanho) + "px;left:" + (div4.getAttribute("left") - tamanho)
+            div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:"+ cor +";top:" + (ydiv4 + tamanho) + "px;left:" + (xdiv4 - tamanho)
             + "px;position:absolute;border: solid 1px;");
         }
     };
