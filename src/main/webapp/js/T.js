@@ -35,31 +35,93 @@ T = function (x, y) {
 
 
         if (orientacao === 1) {
-            celula[centroX + centroY * 10].appendChild(div1);
-            celula[centroX + (centroY - 1) * 10].appendChild(div2);
-            celula[(centroX - 1) + centroY * 10].appendChild(div3);
-            celula[(centroX + 1) + centroY * 10].appendChild(div4);
+            posicao = centroX + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div1);
+            }
+
+            posicao = centroX + (centroY - 1) * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div2);
+            }
+
+            posicao = (centroX - 1) + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div3);
+            }
+
+            posicao = (centroX + 1) + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div4);
+            }
         }
 
         if (orientacao === 2) {
-            celula[centroX + centroY * 10].appendChild(div1);
-            celula[(centroX + 1) + centroY * 10].appendChild(div2);
-            celula[centroX + (centroY - 1) * 10].appendChild(div3);
-            celula[centroX + (centroY + 1) * 10].appendChild(div4);
+            posicao = centroX + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div1);
+            }
+
+            posicao = (centroX + 1) + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div2);
+            }
+
+            posicao = centroX + (centroY - 1) * 10;
+
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div3);
+            }
+
+            posicao = centroX + (centroY + 1) * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div4);
+            }
         }
 
         if (orientacao === 3) {
-            celula[centroX + centroY * 10].appendChild(div1);
-            celula[centroX + (centroY + 1) * 10].appendChild(div2);
-            celula[(centroX + 1) + centroY * 10].appendChild(div3);
-            celula[(centroX - 1) + centroY * 10].appendChild(div4);
+            posicao = centroX + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div1);
+            }
+            posicao = centroX + (centroY + 1) * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div2);
+            }
+
+            posicao = (centroX + 1) + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div3);
+            }
+
+            posicao = (centroX - 1) + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div4);
+            }
         }
 
         if (orientacao === 4) {
-            celula[centroX + centroY * 10].appendChild(div1);
-            celula[(centroX - 1) + centroY * 10].appendChild(div2);
-            celula[centroX + (centroY + 1) * 10].appendChild(div3);
-            celula[centroX + (centroY - 1) * 10].appendChild(div4);
+
+            posicao = centroX + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div1);
+            }
+
+            posicao = (centroX - 1) + centroY * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div2);
+            }
+
+            posicao = centroX + (centroY + 1) * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div3);
+            }
+
+            posicao = centroX + (centroY - 1) * 10;
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div4);
+            }
+
         }
 
     };
@@ -199,7 +261,7 @@ T = function (x, y) {
     this.posiciona = function (coluna, linha) {
         centroX = coluna;
         centroY = linha;
-        
+
     };
 
 };
