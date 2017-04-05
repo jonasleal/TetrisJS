@@ -145,12 +145,33 @@ L = function (x, y) {
 
     this.rodar = function () {
 
-        orientacao = orientacao + 1;
+        
+        
+        if(orientacao === 1){
+            if(centroY < 14 && centroX < 8 && centroX > 0){
+             orientacao = orientacao + 1;
+            }
+        }else
+        if(orientacao === 2){
+            if(centroY < 13 && centroX < 8 && centroX > 0){
+                orientacao = orientacao + 1;
+            }
+        }else
+        if(orientacao === 3){
+            if(centroY < 12 && centroX < 9 && centroX > 1){
+                orientacao = orientacao + 1;
+            }
+        }else
+        if (orientacao === 4){
+            if(centroY < 14 && centroX < 9 && centroX > 1){
+                orientacao = orientacao + 1;
+            }
+        }
         if(orientacao > 4){
             orientacao = 1;
         }
-        this.mostrar();
         
+        this.mostrar();
     };
 };
 

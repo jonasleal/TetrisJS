@@ -44,7 +44,7 @@ S = function (x, y){
 
         if (centroX > 0 && centroY < 13) {
             
-            centroX = centroX -1
+            centroX = centroX -1;
             this.mostrar();
             
         }
