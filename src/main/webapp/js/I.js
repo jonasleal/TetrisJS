@@ -39,7 +39,7 @@ I = function (x, y) {
 
         if (orientacao === 2) {
             celula[centroX + (centroY - 1) * 10].appendChild(div1);
-            //celula[centroX + centroY * 10].appendChild(div2);
+            celula[centroX + centroY * 10].appendChild(div2);
             celula[centroX + (centroY + 1) * 10].appendChild(div3);
             celula[centroX + (centroY + 2) * 10].appendChild(div4);
         }
@@ -73,7 +73,7 @@ I = function (x, y) {
             if(colisao.direita(centroY,centroX+2)){
             
                 centroX = centroX + 1;
-             
+      
             }
             
             this.mostrar();
