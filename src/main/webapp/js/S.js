@@ -10,6 +10,7 @@ S = function (x, y){
     var centroY = y;
     var tamanho = 30;
     var cor = "green";
+    var orientacao = 1;
     
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
@@ -30,12 +31,19 @@ S = function (x, y){
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
 
-
-        celula[centroX + 1 + centroY * 10].appendChild(div1);
-        celula[centroX  + centroY * 10].appendChild(div2);
-        celula[centroX + (centroY - 1) * 10].appendChild(div3);
-        celula[centroX + 1 + (centroY + 1) * 10].appendChild(div4);
-
+        if (orientacao === 1) {
+            celula[centroX + 1 + centroY * 10].appendChild(div1);
+            celula[centroX + centroY * 10].appendChild(div2);
+            celula[centroX + (centroY - 1) * 10].appendChild(div3);
+            celula[centroX + 1 + (centroY + 1) * 10].appendChild(div4);
+        }
+        if(orientacao === 2){
+            celula[centroX + 1 + centroY * 10].appendChild(div1);
+            celula[centroX + 1 + (centroY - 1) * 10].appendChild(div2);
+            celula[centroX + 2 + centroY * 10].appendChild(div3);
+            celula[centroX - 1 + (centroY - 1) * 10].appendChild(div4);
+     
+        }
     };
 
     this.moverEsquerda = function () {
@@ -68,7 +76,21 @@ S = function (x, y){
     };
 
     this.rodar = function () {
-
+        
+        if(orientacao === 1){
+             if(centroY < 13 && centroX < 9 && centroX > 1){
+                orientacao = orientacao + 1;
+            }
+        }
+        if(orientacao === 2){
+             if(centroY < 14 && centroX < 8 && centroX > 1){
+                orientacao = orientacao + 1;
+            }
+        }
+        if(orientacao > 2){
+            orientacao = 1;
+        }
+        this.mostrar();
     };
 };
 

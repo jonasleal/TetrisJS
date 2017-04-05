@@ -10,7 +10,8 @@ L = function (x, y) {
     var tamanho = 30;
     var cor = "orange";
     var orientacao = 1;
-
+    var colisao = new Colisao();
+    
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
     var div3 = document.createElement("div");
@@ -37,10 +38,14 @@ L = function (x, y) {
             celula[centroX + (centroY - 2) * 10].appendChild(div4);
         }
         if(orientacao === 2){
-            celula[centroX + centroY * 10].appendChild(div1);
-            celula[centroX + (centroY + 1)* 10].appendChild(div2);
-            celula[centroX + 1 + centroY * 10].appendChild(div3);
-            celula[centroX + 2 + centroY  * 10].appendChild(div4);
+                
+                celula[centroX + centroY * 10].appendChild(div1);
+                celula[centroX + (centroY + 1)* 10].appendChild(div2);
+                celula[centroX + 1 + centroY * 10].appendChild(div3);
+                celula[centroX + 2 + centroY  * 10].appendChild(div4);
+            
+            
+            
         }
         if(orientacao === 3){
             celula[centroX + centroY * 10].appendChild(div1);
@@ -66,30 +71,35 @@ L = function (x, y) {
         
         if(orientacao ===  1){
             if (centroX > 0 && centroY < 14) {
-
-                centroX = centroX - 1;
-                this.mostrar();
+                if (colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY - 1, centroX) && colisao.esquerda(centroY - 2, centroX)) {
+                    centroX = centroX - 1;
+                    this.mostrar();
+                }
             }
         }
         if(orientacao === 2){
             if (centroX > 0 && centroY < 13) {
-
-                centroX = centroX - 1;
-                this.mostrar();
+                if (colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY + 1, centroX)) {
+                    centroX = centroX - 1;
+                    this.mostrar();
+            
+                }
             }
         }
         if(orientacao === 3){
             if (centroX > 1 && centroY < 12) {
-
-                centroX = centroX - 1;
-                this.mostrar();
+                    if (colisao.esquerda(centroY, centroX - 1) && colisao.esquerda(centroY + 1, centroX) && colisao.esquerda(centroY + 2, centroX)) {
+                        centroX = centroX - 1;
+                        this.mostrar();
+                    }
             }
         }
         if(orientacao === 4){
             if (centroX > 2 && centroY < 12) {
-
-                centroX = centroX - 1;
-                this.mostrar();
+                if (colisao.esquerda(centroY, centroX - 2) && colisao.esquerda(centroY - 1, centroX)) {
+                    centroX = centroX - 1;
+                    this.mostrar();
+            }
             }
         }
     };
@@ -97,48 +107,72 @@ L = function (x, y) {
     this.moverDireita = function () {
         if(orientacao === 1){
             if (centroX < 8 && centroY < 14) {
-                centroX = centroX + 1;
-                this.mostrar();
+                if (colisao.direita(centroY, centroX + 1) && colisao.direita(centroY - 1, centroX) && colisao.direita(centroY - 2, centroX)) {
+        
+                    centroX = centroX + 1;
+                    this.mostrar();
+                }
             }
         }
         if(orientacao === 2){
             if (centroX < 7 && centroY < 13) {
-                centroX = centroX + 1;
-                this.mostrar();
+                if (colisao.direita(centroY, centroX + 2) && colisao.direita(centroY + 1, centroX)) {
+        
+                    centroX = centroX + 1;
+                    this.mostrar();
+                }
             }
         }
         if(orientacao === 3){
             if (centroX < 9 && centroY < 12) {
-                centroX = centroX + 1;
-                this.mostrar();
+                if (colisao.direita(centroY, centroX) && colisao.direita(centroY + 1, centroX) && colisao.direita(centroY + 2, centroX)) {
+                    centroX = centroX + 1;
+                    this.mostrar();
+                }
             }
         }
         if(orientacao === 4){
             if (centroX < 9 && centroY < 14) {
-                centroX = centroX + 1;
-                this.mostrar();
+                if (colisao.direita(centroY, centroX) && colisao.direita(centroY - 1, centroX) ) {
+                    centroX = centroX + 1;
+                    this.mostrar();
+                }
             }
         }
         
     };
 
     this.moverBaixo = function () {
-        if(orientacao === 1 || orientacao === 4){
+        if(orientacao === 1 ){
             if (centroY < 14) {
-                centroY = centroY + 1;
-                this.mostrar();
+                if (colisao.baixo(centroY, centroX) && colisao.baixo(centroY , centroX +1)) {
+                    centroY = centroY + 1;
+                    this.mostrar();
+                }
             }
         }
         if(orientacao === 2){
              if (centroY < 13) {
-                centroY = centroY + 1;
-                this.mostrar();
+                if (colisao.baixo(centroY + 1, centroX) && colisao.baixo(centroY , centroX + 1) && colisao.baixo(centroY, centroX + 2)) {
+                    centroY = centroY + 1;
+                    this.mostrar();
+                }
             }
         }
         if(orientacao === 3){
              if (centroY < 12) {
-                centroY = centroY + 1;
-                this.mostrar();
+                if (colisao.baixo(centroY + 2 , centroX) && colisao.baixo(centroY , centroX - 1)) {
+                    centroY = centroY + 1;
+                    this.mostrar();
+                }
+            }
+        }
+        if(orientacao === 4){
+            if (centroY < 14) {
+                if (colisao.baixo(centroY, centroX) && colisao.baixo(centroY , centroX - 1) && colisao.baixo(centroY, centroX - 2)) {
+                    centroY = centroY + 1;
+                    this.mostrar();
+                }
             }
         }
     };
