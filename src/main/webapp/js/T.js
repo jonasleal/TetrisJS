@@ -11,6 +11,9 @@ T = function (x, y) {
     var tamanho = 30;
     var cor = "purple";
     orientacao = 1;
+    var colisao =  new Colisao();
+    
+    
 
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");

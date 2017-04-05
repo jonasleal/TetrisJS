@@ -9,68 +9,29 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <style>
-            #divPrincipal{
-                background: gainsboro;
-                width:300px;
-                height:500px;
-
-            }
-        </style>
-    </head>
-    <body>
-        <div id="divPrincipal"></div>
-
-
-         <script src="js/MovimentoListener.js"></script>
-        <script src="js/Posicao.js"></script>
+         <script src="js/Colisao.js"></script>
+        <script src="js/MovimentoListener.js"></script>
+        <script src="js/CSS.js"></script>
         <script src="js/Cenario.js"></script>
         <script src="js/Quadrado.js"></script>
         <script src = "js/T.js"></script>
         <script src ="js/I.js"></script>
         <script src="js/L.js"></script>
         <script src="js/S.js"></script>
-        
-        
-        <script>
-            var cenario = new Cenario();
-            var tetramino = new I(1 ,0);
-            
-            tetramino.mostrar();
-            
-//            var i = new I(220,100);
-//            i.mostrar();
-//            var l = new L(70,100);
-//            l.mostrar();
-//            var t = new T(250,130);
-//            t.mostrar();
-            //            var x = 0;
-            //            var y = 0;
-            //            interacao = function () {
-            //                x = x + 30;
-            //                y = y + 30;
-            //                var divInterno = document.getElementById("divInterno");
-            //                divInterno.setAttribute("style", "background:blue; top:" + y + "px; left:" + x + "px; width:30px; height:30px; border:solid black 1px;");
-            //
-            //            };
-            //            setInterval(interacao(), 1);
-            //            var tetramino = new Quadrado(200, 200);
-            //            tetramino.mostrar();
-            //
-            //            var l = new L(400, 400);
-            //
-            //            var t = new T(500, 500);
-            //            t.mostrar();
-            //
-            //            var i = new I(100, 100);
-            //            i.mostrar();
+    </head>
 
+    <body>
+           <script>
+            var cenario = new Cenario();
+            var tetramino = new I(1 ,1);
+            
+            var teste = new Quadrado(4,4);
+            teste.mostrar();
+            
+        tetramino.mostrar();
+            
 
         </script>
-
-      
-
         
     </body>
 </html>
