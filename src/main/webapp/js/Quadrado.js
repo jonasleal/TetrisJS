@@ -8,6 +8,7 @@ Quadrado = function (x, y) {
     var centroY = y;
     var tamanho = 30;
     var cor = "yellow";
+    var colisao = new Colisao();
 
 
     var div1 = document.createElement("div");
@@ -38,45 +39,30 @@ Quadrado = function (x, y) {
     };
 
     this.moverEsquerda = function () {
-        var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
 
-        if (centroX > 0 && centroY < 14) {
-            child = celula[centroX - 1 + (centroY * 10)].childElementCount;
-            child = child + celula[centroX - 11 + (centroY * 10)].childElementCount;
-            if (child === 0) {
-                centroX = centroX - 1;
-                this.mostrar();
-            }
-
+        if (colisao.esquerda(centroY, centroX) &&
+                colisao.esquerda(centroY - 1, centroX)) {
+            centroX = centroX - 1;
+            this.mostrar();
         }
 
     };
 
     this.moverDireita = function () {
-        var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
-        if (centroX < 8 && centroY < 14) {
-            child = celula[centroX + 2 + (centroY * 10)].childElementCount;
-            child = child + celula[centroX - 8 + (centroY * 10)].childElementCount;
-            if (child === 0) {
-                centroX = centroX + 1;
-                this.mostrar();
-            }
+        if (colisao.direita(centroY, centroX) &&
+                colisao.direita(centroY - 1, centroX)) {
+            centroX = centroX + 1;
+            this.mostrar();
         }
 
     };
 
     this.moverBaixo = function () {
-        var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
-        if (centroY < 14) {
-            child = celula[centroX + (centroY * 10)+10].childElementCount;
-            child = child + celula[centroX + 1 + (centroY * 10)+10].childElementCount;
-            if (child === 0) {
-                centroY = centroY + 1;
-                this.mostrar();
-            }
+        if (colisao.baixo(centroY, centroX) &&
+                colisao.baixo(centroY , centroX +1)) {
+
+            centroY = centroY + 1;
+            this.mostrar();
         }
 
     };
