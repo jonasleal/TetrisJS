@@ -10,6 +10,7 @@ I = function (x, y) {
     var tamanho = 30;
     var cor = "aqua";
     var orientacao = 1;
+    var colisao = new Colisao();
 
 
     var div1 = document.createElement("div");
@@ -23,9 +24,6 @@ I = function (x, y) {
     div2.setAttribute("style", css);
     div3.setAttribute("style", css);
     div4.setAttribute("style", css);
-
-
-
 
     this.mostrar = function () {
         var tabela = document.getElementById("tabelaPrincipal");
@@ -50,38 +48,45 @@ I = function (x, y) {
 
     this.moverEsquerda = function () {
         if (orientacao === 1) {
-            if (centroX > 1 && centroY < 14) {
 
+            if (colisao.esquerda(centroY, (centroX - 1))) {
                 centroX = centroX - 1;
-                this.mostrar();
             }
+            
+            this.mostrar();
+
         } else if (orientacao === 2) {
-            if (centroX > 0 && centroY < 12) {
+            
+            if (colisao.esquerda(centroY - 1, centroX) && colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY + 1, centroX)
+                    && colisao.esquerda(centroY + 2, centroX)) {
                 centroX = centroX - 1;
-
-                this.mostrar();
             }
-
-
+            this.mostrar();
         }
-
-
-
     };
 
     this.moverDireita = function () {
-
+        
         if (orientacao === 1) {
-            if (centroX < 7 && centroY < 14) {
+            //if (centroX < 7 && centroY < 14) {
+            
+            if(colisao.direita(centroY,centroX+2)){
+            
                 centroX = centroX + 1;
-                this.mostrar();
+      
             }
-
+            
+            this.mostrar();
+            
         } else if (orientacao === 2) {
-            if (centroX < 9 && centroY < 12) {
+            //if (centroX < 9 && centroY < 12) {
+            
+            if(colisao.direita(centroY -1,centroX) && colisao.direita(centroY,centroX) && colisao.direita(centroY + 1,centroX) &&
+                    colisao.direita(centroY + 2,centroX)){
                 centroX = centroX + 1;
-                this.mostrar();
             }
+                this.mostrar();
+            
         }
     };
 
@@ -109,7 +114,9 @@ I = function (x, y) {
 
         if (orientacao === 1 && centroY < 14) {
             orientacao = orientacao + 1;
-        } else if(orientacao === 2 && centroY<12){
+        } else
+        // Esse if verifica se o I quando em pé esta do lado da parede esquerda, ou direita, ou no chão    
+        if (orientacao === 2 && centroY < 12 && centroX > 0 && centroX < 8) {
             orientacao = orientacao + 1;
         }
 
