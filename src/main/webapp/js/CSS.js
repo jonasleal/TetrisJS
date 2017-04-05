@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-Posicao = function (_css){
+CSS = function (_css){
     var css = _css;
    
     this.getTop = function (){
