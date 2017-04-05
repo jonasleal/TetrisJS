@@ -101,10 +101,12 @@ I = function (x, y) {
             if (colisao.baixo(centroY, centroX - 1) && colisao.baixo(centroY, centroX) && colisao.baixo(centroY, centroX + 1) &&
                     colisao.baixo(centroY, centroX + 2)) {
                 centroY = centroY + 1;
-
+                this.mostrar();
+                return true;
+                
             }
 
-            this.mostrar();
+            
         }
 
         if (orientacao === 2) {
@@ -112,9 +114,10 @@ I = function (x, y) {
 
             if (colisao.baixo(centroY + 2, centroX)) {
                 centroY = centroY + 1;
-
+                this.mostrar();
+                return true;
             }
-            this.mostrar();
+         return false;   
         }
 
 

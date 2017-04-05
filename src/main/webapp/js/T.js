@@ -125,28 +125,36 @@ T = function (x, y) {
             
             if(colisao.baixo(centroY,centroX) && colisao.baixo(centroY,centroX -1) && colisao.baixo(centroY,centroX +1)){
                 centroY = centroY +1;
+                this.mostrar();
+                return true;
             }
-            this.mostrar();
+            
             
         }else if(orientacao === 2){
             
             if(colisao.baixo(centroY,centroX + 1) && colisao.baixo(centroY+1,centroX)){
                 centroY = centroY+1;
+                this.mostrar();
+                return true;
             }
-            this.mostrar();
+            
             
         }else if(orientacao === 3){
             if(colisao.baixo(centroY + 1,centroX) && colisao.baixo(centroY,centroX -1) && colisao.baixo(centroY,centroX +1)){
                 centroY = centroY +1;
+                this.mostrar();
+                return true;
             }
-            this.mostrar();
+            
             
         }else if(orientacao ===4){
             
             if(colisao.baixo(centroY,centroX - 1) && colisao.baixo(centroY + 1,centroX)){
                 centroY = centroY+1;
+                this.mostrar();
+                return true;
             }
-            this.mostrar();
+            
             
         }
     };
