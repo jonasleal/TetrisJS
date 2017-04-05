@@ -10,10 +10,10 @@ T = function (x, y) {
     var centroY = y;
     var tamanho = 30;
     var cor = "purple";
-    orientacao = 1;
-    var colisao =  new Colisao();
-    
-    
+    var orientacao = 4;
+    var colisao = new Colisao();
+
+
 
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
@@ -31,67 +31,154 @@ T = function (x, y) {
     this.mostrar = function () {
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
+
+
+        if (orientacao === 1) {
+            celula[centroX + centroY * 10].appendChild(div1);
+            celula[centroX + (centroY - 1) * 10].appendChild(div2);
+            celula[(centroX - 1) + centroY * 10].appendChild(div3);
+            celula[(centroX + 1) + centroY * 10].appendChild(div4);
+        } 
         
-        celula[centroX + centroY * 10].appendChild(div1);
-        celula[centroX + (centroY+1) * 10].appendChild(div2);
-        celula[(centroX - 1) + centroY * 10].appendChild(div3);
-        celula[(centroX + 1) + centroY * 10].appendChild(div4);
+        if(orientacao === 2){
+            celula[centroX + centroY * 10].appendChild(div1);
+            celula[(centroX + 1) + centroY * 10].appendChild(div2);
+            celula[centroX  + (centroY -1) * 10].appendChild(div3);
+            celula[centroX  + (centroY +1) * 10].appendChild(div4);
+        }
+        
+        if(orientacao === 3) {
+            celula[centroX + centroY * 10].appendChild(div1);
+            celula[centroX  + (centroY+1) * 10].appendChild(div2);
+            celula[(centroX+1)  + centroY  * 10].appendChild(div3);
+            celula[(centroX -1)  + centroY * 10].appendChild(div4);
+        }
+        
+        if(orientacao === 4){
+            celula[centroX + centroY * 10].appendChild(div1);
+            celula[(centroX - 1) + centroY * 10].appendChild(div2);
+            celula[centroX  + (centroY + 1)  * 10].appendChild(div3);
+            celula[centroX  + (centroY - 1) * 10].appendChild(div4);
+        }
     };
 
     this.moverEsquerda = function () {
-        centroX = centroX - tamanho;
-        div1.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background:" + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX) + "px; position: absolute;border: solid 1px");
-
-        div2.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background:" + cor + ";top:" +
-                (centroY + tamanho) + "px; left:" + (centroX) + "px; position: absolute;border: solid 1px");
-
-        div3.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background:" + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX - tamanho) + "px; position: absolute;border: solid 1px");
-
-        div4.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background:" + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX + tamanho) + "px; position: absolute;border: solid 1px");
-
+        if(orientacao === 1){
+            if(colisao.esquerda(centroY,(centroX-1)) && colisao.esquerda((centroY-1),centroX)){
+                centroX = centroX - 1;
+            }
+            this.mostrar();
+        }else if(orientacao === 2){
+            if(colisao.esquerda((centroY - 1),centroX) && colisao.esquerda(centroY,centroX) && colisao.esquerda((centroY+1),centroX)){
+                centroX = centroX -1;
+            }
+            this.mostrar();
+            
+        }else if(orientacao === 3){
+            if(colisao.esquerda(centroY,(centroX - 1)) && colisao.esquerda((centroY+1),centroX)){
+                centroX = centroX -1;
+            }
+            this.mostrar();
+            
+            
+        }else if(orientacao === 4){
+            if(colisao.esquerda(centroY,(centroX - 1)) && colisao.esquerda((centroY - 1),centroX) && colisao.esquerda( (centroY + 1),centroX)){
+                centroX = centroX -1;
+            }
+            this.mostrar();
+        }
     };
 
 
     this.moverDireita = function () {
-        centroX = centroX + tamanho;
-
-        div1.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX) + "px; position: absolute; border: solid 1px");
-
-        div2.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY + tamanho) + "px; left:" + (centroX) + "px; position: absolute; border: solid 1px");
-
-        div3.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX - tamanho) + "px; position: absolute; border: solid 1px");
-
-
-        div4.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX + tamanho) + "px; position: absolute; border: solid 1px");
-
-
+        if(orientacao === 1){
+            if(colisao.direita((centroY - 1),centroX) &&colisao.direita(centroY,(centroX + 1)) ){
+                centroX = centroX +1;
+            }
+            this.mostrar();
+            
+        }else if(orientacao === 2){
+            if(colisao.direita((centroY - 1),centroX) && colisao.direita(centroY,(centroX + 1)) &&colisao.direita((centroY + 1),centroX )){
+                centroX = centroX +1;
+            }
+            this.mostrar();
+            
+        }else if( orientacao === 3){
+            if(colisao.direita((centroY + 1),centroX) &&colisao.direita(centroY,(centroX + 1)) ){
+                centroX = centroX +1;
+            }
+            this.mostrar();
+            
+        }else if(orientacao ===4){
+            if(colisao.direita((centroY - 1),centroX) && colisao.direita(centroY,centroX) && colisao.direita((centroY + 1),centroX )){
+                centroX = centroX +1;
+            }
+            this.mostrar();
+        }
     };
 
 
     this.moverBaixo = function () {
-        centroY = centroY + tamanho;
-
-
-        div1.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX) + "px; position: absolute; border: solid 1px");
-
-        div2.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY + tamanho) + "px; left:" + (centroX) + "px; position: absolute; border: solid 1px");
-
-        div3.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX - tamanho) + "px; position: absolute; border: solid 1px");
-
-
-        div4.setAttribute("style", "width:" + (tamanho - 1) + "px; height:" + (tamanho - 1) + "px; background: " + cor + ";top:" +
-                (centroY) + "px; left:" + (centroX + tamanho) + "px; position: absolute; border: solid 1px");
-
+        if(orientacao === 1){
+            
+            if(colisao.baixo(centroY,centroX) && colisao.baixo(centroY,centroX -1) && colisao.baixo(centroY,centroX +1)){
+                centroY = centroY +1;
+            }
+            this.mostrar();
+            
+        }else if(orientacao === 2){
+            
+            if(colisao.baixo(centroY,centroX + 1) && colisao.baixo(centroY+1,centroX)){
+                centroY = centroY+1;
+            }
+            this.mostrar();
+            
+        }else if(orientacao === 3){
+            if(colisao.baixo(centroY + 1,centroX) && colisao.baixo(centroY,centroX -1) && colisao.baixo(centroY,centroX +1)){
+                centroY = centroY +1;
+            }
+            this.mostrar();
+            
+        }else if(orientacao ===4){
+            
+            if(colisao.baixo(centroY,centroX - 1) && colisao.baixo(centroY + 1,centroX)){
+                centroY = centroY+1;
+            }
+            this.mostrar();
+            
+        }
+    };
+    
+    
+    this.rodar = function (){
+      //primeiro if verifica a orientacao, o segundo a posição das paredes pra poder rodar, e o 3 vai verificar pecas pra ver se ele pode rodar
+      
+      
+        if(orientacao === 1 ){
+            
+            if(centroX >0 && centroX <9 && centroY <14 ){
+                orientacao = orientacao +1;
+            }
+        }else if(orientacao === 2){
+            
+            if(centroX > 0 && centroX < 9 && centroY < 13 ){
+                orientacao = orientacao +1;
+            }
+        }else if(orientacao === 3){
+            
+            if(centroX > 0 && centroX < 9 && centroY < 13){
+                orientacao = orientacao +1;
+            }
+        }else if(orientacao === 4){
+            if(centroX > 0 && centroX <9 && centroY <13){
+                orientacao = orientacao +1;
+            }
+        }
+        
+        if(orientacao > 4){
+            orientacao = 1;
+        }
+        this.mostrar();
     };
 
 
