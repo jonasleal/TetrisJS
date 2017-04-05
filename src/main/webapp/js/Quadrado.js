@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-Quadrado = function (x, y) {
-    var centroX = x;
-    var centroY = y;
+Quadrado = function (coluna, linha) {
+    var centroX = coluna;
+    var centroY = linha;
     var tamanho = 30;
     var cor = "yellow";
     var colisao = new Colisao();
@@ -30,11 +30,23 @@ Quadrado = function (x, y) {
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
 
-
-        celula[centroX + centroY * 10].appendChild(div1);
-        celula[centroX + 1 + centroY * 10].appendChild(div2);
-        celula[centroX + (centroY - 1) * 10].appendChild(div3);
-        celula[centroX + 1 + (centroY - 1) * 10].appendChild(div4);
+        posicao = (centroX + centroY * 10);
+        if (posicao >= 0) {
+            celula[posicao].appendChild(div1);
+        }
+        posicao = (centroX + 1 + centroY * 10);
+        if (posicao >= 0) {
+            celula[posicao].appendChild(div2);
+        }
+        posicao = (centroX + (centroY - 1) * 10);
+        if(posicao >=  0){
+            celula[posicao].appendChild(div3);
+        }
+        posicao = (centroX + 1 + (centroY - 1) * 10);
+        if(posicao >= 0){
+             celula[posicao].appendChild(div4);
+        }
+       
 
     };
 
@@ -49,8 +61,8 @@ Quadrado = function (x, y) {
     };
 
     this.moverDireita = function () {
-        if (colisao.direita(centroY, centroX) &&
-                colisao.direita(centroY - 1, centroX)) {
+        if (colisao.direita(centroY, centroX + 1) &&
+                colisao.direita(centroY - 1, centroX + 1)) {
             centroX = centroX + 1;
             this.mostrar();
         }
@@ -59,32 +71,23 @@ Quadrado = function (x, y) {
 
     this.moverBaixo = function () {
         if (colisao.baixo(centroY, centroX) &&
-                colisao.baixo(centroY , centroX +1)) {
+                colisao.baixo(centroY, centroX + 1)) {
 
             centroY = centroY + 1;
             this.mostrar();
+            return true;
         }
+        return false;
 
     };
 
     this.rodar = function () {
 
     };
-    this.posiciona = function (x, y) {
-        centroX = x;
-        centroY = y;
-        div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY) + "px;left:" + (centroX)
-                + "px;position:absolute;border: solid 1px;");
-        div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY + tamanho) + "px;left:" + (centroX)
-                + "px;position:absolute;border: solid 1px;");
-        div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY) + "px;left:" + (centroX + tamanho)
-                + "px;position:absolute;border: solid 1px;");
-        div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
-                + "px;position:absolute;border: solid 1px;");
+    this.posiciona = function (coluna, linha) {
+        centroX = coluna;
+        centroY = linha;
+        
     };
 };
 

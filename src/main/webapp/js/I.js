@@ -52,11 +52,14 @@ I = function (x, y) {
             if (colisao.esquerda(centroY, (centroX - 1))) {
                 centroX = centroX - 1;
             }
+
             
             this.mostrar();
 
+
         } else if (orientacao === 2) {
-            
+
+
             if (colisao.esquerda(centroY - 1, centroX) && colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY + 1, centroX)
                     && colisao.esquerda(centroY + 2, centroX)) {
                 centroX = centroX - 1;
@@ -69,41 +72,51 @@ I = function (x, y) {
         
         if (orientacao === 1) {
             //if (centroX < 7 && centroY < 14) {
-            
-            if(colisao.direita(centroY,centroX+2)){
-            
+
+            if (colisao.direita(centroY, centroX + 2)) {
+
                 centroX = centroX + 1;
-      
+
             }
-            
+
             this.mostrar();
-            
+
         } else if (orientacao === 2) {
             //if (centroX < 9 && centroY < 12) {
-            
-            if(colisao.direita(centroY -1,centroX) && colisao.direita(centroY,centroX) && colisao.direita(centroY + 1,centroX) &&
-                    colisao.direita(centroY + 2,centroX)){
+
+            if (colisao.direita(centroY - 1, centroX) && colisao.direita(centroY, centroX) && colisao.direita(centroY + 1, centroX) &&
+                    colisao.direita(centroY + 2, centroX)) {
                 centroX = centroX + 1;
             }
-                this.mostrar();
-            
+            this.mostrar();
+
+
         }
     };
 
     this.moverBaixo = function () {
         if (orientacao === 1) {
-            if (centroY < 14) {
+            //if (centroY < 14) {
+
+            if (colisao.baixo(centroY, centroX - 1) && colisao.baixo(centroY, centroX) && colisao.baixo(centroY, centroX + 1) &&
+                    colisao.baixo(centroY, centroX + 2)) {
                 centroY = centroY + 1;
-                this.mostrar();
+
             }
+
+            this.mostrar();
         }
 
         if (orientacao === 2) {
-            if (centroY < 12) {
+            //if (centroY < 12) {
+
+            if (colisao.baixo(centroY + 2, centroX)) {
                 centroY = centroY + 1;
-                this.mostrar();
+
             }
+            this.mostrar();
         }
+
 
 
 
@@ -127,7 +140,6 @@ I = function (x, y) {
 
     };
 
-
     this.posiciona = function (x, y) {
         centroX = x;
         centroY = y;
@@ -145,5 +157,3 @@ I = function (x, y) {
                 + "px;position:absolute;border: solid 1px;");
     };
 };
-
-
