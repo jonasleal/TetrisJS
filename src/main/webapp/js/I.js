@@ -160,28 +160,34 @@ I = function (x, y) {
     this.rodar = function () {
 
 
-        if (orientacao === 1 && centroY < 14 && centroY >= 1) {
-            orientacao = orientacao + 1;
+        if (orientacao === 1 ) {
+            
+            if( centroY < 14 && centroY >= 1){
+                
+                orientacao = orientacao + 1;
+                
+            }
+            
+            
         } else
         // Esse if verifica se o I quando em pé esta do lado da parede esquerda, ou direita, ou no chão    
-        if (orientacao === 2 && centroY < 12 && centroX > 0 && centroX < 8) {
-            orientacao = orientacao + 1;
+        if (orientacao === 2  ) {
+            
+            if(centroY < 12 && centroX > 0 && centroX < 8){
+                
+                    orientacao = orientacao + 1;
+                    
+            }
         }
 
         if (orientacao > 2) {
+            
             orientacao = 1;
         }
         this.mostrar();
 
     };
     
-    
-    this.verificaColisao = function(){
-        
-    };
-    
-    
-
     this.posiciona = function (coluna, linha) {
         centroX = coluna;
         centroY = linha;
