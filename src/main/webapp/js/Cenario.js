@@ -16,15 +16,16 @@ Cenario = function () {
 
 
     iniciarJogo = function () {
+        tetramino = (sorteio());
         proximo = (sorteio());
         setInterval(interacao, 1000);
     };
 
     sorteio = function () {
-        sorteado  = Math.floor(Math.random() * 4);
+        sorteado  = Math.floor(Math.random() * 3);
         console.log(sorteado);
-        var tetraminos = [new Quadrado(4, 0), new I(4, 0)];
-        return tetraminos[0];
+        var tetraminos = [new Quadrado(4, 0), new I(4, 0), new T( 4,0)];
+        return tetraminos[sorteado];
     };
 
     this.preview = function (_tetramino) {
