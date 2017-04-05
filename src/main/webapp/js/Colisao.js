@@ -8,8 +8,13 @@ Colisao = function () {
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
         if (coluna > 0 && linha < 14) {
-            child = celula[coluna - 1 + (linha * 10)].childElementCount;
-            if (child === 0) {
+            posicao = coluna - 1 + (linha * 10);
+            if (posicao >= 0) {
+                child = celula[posicao].childElementCount;
+                if (child === 0) {
+                    return true;
+                }
+            } else {
                 return true;
             }
 
@@ -20,8 +25,13 @@ Colisao = function () {
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
         if (coluna < 9 && linha < 14) {
-            child = celula[coluna + 1 + (linha * 10)].childElementCount;
-            if (child === 0) {
+            posicao = coluna + 1 + (linha * 10);
+            if (posicao >= 0) {
+                child = celula[posicao].childElementCount;
+                if (child === 0) {
+                    return true;
+                }
+            } else {
                 return true;
             }
         }
@@ -30,7 +40,7 @@ Colisao = function () {
     this.baixo = function (linha, coluna) {
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
-        if (coluna < 14) {
+        if (linha < 14) {
             child = celula[coluna + (linha * 10) + 10].childElementCount;
             if (child === 0) {
                 return true;
