@@ -160,7 +160,7 @@ I = function (x, y) {
     this.rodar = function () {
 
 
-        if (orientacao === 1 && centroY < 14) {
+        if (orientacao === 1 && centroY < 14 && centroY >= 1) {
             orientacao = orientacao + 1;
         } else
         // Esse if verifica se o I quando em pé esta do lado da parede esquerda, ou direita, ou no chão    
