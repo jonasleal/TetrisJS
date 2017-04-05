@@ -196,10 +196,10 @@ T = function (x, y) {
 
     };
 
-    this.posiciona = function (linha, coluna) {
+    this.posiciona = function (coluna, linha) {
         centroX = coluna;
         centroY = linha;
-
+        
     };
 
 };
