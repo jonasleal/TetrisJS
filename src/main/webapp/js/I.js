@@ -51,8 +51,8 @@ I = function (x, y) {
     this.moverEsquerda = function () {
         if (orientacao === 1) {
             if (centroX > 1 && centroY < 14) {
-
                 centroX = centroX - 1;
+                
                 this.mostrar();
             }
         } else if (orientacao === 2) {
@@ -109,7 +109,9 @@ I = function (x, y) {
 
         if (orientacao === 1 && centroY < 14) {
             orientacao = orientacao + 1;
-        } else if(orientacao === 2 && centroY<12){
+        } else 
+        // Esse if verifica se o I quando em pé esta do lado da parede esquerda, ou direita, ou no chão    
+        if (orientacao === 2 && centroY < 12&& centroX>0 && centroX < 8) {
             orientacao = orientacao + 1;
         }
 
