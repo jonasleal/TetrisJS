@@ -135,6 +135,13 @@ I = function (x, y) {
         this.mostrar();
 
     };
+    
+    
+    this.verificaColisao = function(){
+        
+    };
+    
+    
 
     this.posiciona = function (x, y) {
         centroX = x;

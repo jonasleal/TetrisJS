@@ -181,7 +181,10 @@ T = function (x, y) {
         this.mostrar();
     };
 
-    
+    this.verificaColisao = function(){
+        
+        
+    };
     
 
 
