@@ -19,7 +19,7 @@ Colisao = function () {
     this.direita = function (linha, coluna) {
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
-        if (coluna < 8 && linha < 14) {
+        if (coluna < 9 && linha < 14) {
             child = celula[coluna + 1 + (linha * 10)].childElementCount;
             if (child === 0) {
                 return true;
