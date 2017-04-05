@@ -96,7 +96,7 @@ Cenario = function () {
         div1.appendChild(div2);
         document.body.appendChild(div1);
 
-        iniciarJogo();
+      //iniciarJogo();
     };
 
 };

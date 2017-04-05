@@ -53,9 +53,12 @@ I = function (x, y) {
                 centroX = centroX - 1;
             }
 
+            
             this.mostrar();
 
+
         } else if (orientacao === 2) {
+
 
             if (colisao.esquerda(centroY - 1, centroX) && colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY + 1, centroX)
                     && colisao.esquerda(centroY + 2, centroX)) {
@@ -66,7 +69,7 @@ I = function (x, y) {
     };
 
     this.moverDireita = function () {
-
+        
         if (orientacao === 1) {
             //if (centroX < 7 && centroY < 14) {
 
@@ -86,6 +89,7 @@ I = function (x, y) {
                 centroX = centroX + 1;
             }
             this.mostrar();
+
 
         }
     };
@@ -135,6 +139,13 @@ I = function (x, y) {
         this.mostrar();
 
     };
+    
+    
+    this.verificaColisao = function(){
+        
+    };
+    
+    
 
     this.posiciona = function (x, y) {
         centroX = x;

@@ -15,6 +15,7 @@ T = function (x, y) {
 
 
 
+
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
     var div3 = document.createElement("div");
@@ -60,6 +61,7 @@ T = function (x, y) {
             celula[centroX  + (centroY + 1)  * 10].appendChild(div3);
             celula[centroX  + (centroY - 1) * 10].appendChild(div4);
         }
+
     };
 
     this.moverEsquerda = function () {
@@ -181,6 +183,11 @@ T = function (x, y) {
         this.mostrar();
     };
 
+    this.verificaColisao = function(){
+        
+        
+    };
+    
 
 
 };

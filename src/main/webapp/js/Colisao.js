@@ -32,6 +32,7 @@ Colisao = function () {
                     return true;
                 }
             } else {
+
                 return true;
             }
         }
@@ -47,6 +48,6 @@ Colisao = function () {
             }
         }
         return false;
-    }
+    };
 };
 

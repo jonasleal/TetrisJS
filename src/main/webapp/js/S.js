@@ -10,121 +10,87 @@ S = function (x, y){
     var centroY = y;
     var tamanho = 30;
     var cor = "green";
+    var orientacao = 1;
     
     var div1 = document.createElement("div");
-    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
     var div2 = document.createElement("div");
-    div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
     var div3 = document.createElement("div");
-    div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
-    
     var div4 = document.createElement("div");
-    div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
+    var css = "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
+            + "px;background:" + cor + ";position:static;border: solid 1px;";
 
+    div1.setAttribute("style", css);
+    div2.setAttribute("style", css);
+    div3.setAttribute("style", css);
+    div4.setAttribute("style", css);
     
+ 
 
-this.mostrar=function () {
-    
-    var div = document.getElementById("divPrincipal");
-    
-    div.appendChild(div1);
-    div.appendChild(div2);
-    div.appendChild(div3);
-    div.appendChild(div4); 
-    
-};
-this.moverEsquerda = function () {
-        
-    centroX = centroX - tamanho;
-    
-    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
+
+    this.mostrar = function () {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celula = tabela.getElementsByTagName("td");
+
+        if (orientacao === 1) {
+            celula[centroX + 1 + centroY * 10].appendChild(div1);
+            celula[centroX + centroY * 10].appendChild(div2);
+            celula[centroX + (centroY - 1) * 10].appendChild(div3);
+            celula[centroX + 1 + (centroY + 1) * 10].appendChild(div4);
+        }
+        if(orientacao === 2){
+            celula[centroX + 1 + centroY * 10].appendChild(div1);
+            celula[centroX + 1 + (centroY - 1) * 10].appendChild(div2);
+            celula[centroX + 2 + centroY * 10].appendChild(div3);
+            celula[centroX - 1 + (centroY - 1) * 10].appendChild(div4);
+     
+        }
+    };
+
+    this.moverEsquerda = function () {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celula = tabela.getElementsByTagName("td");
+
+        if (centroX > 0 && centroY < 13) {
+            
+            centroX = centroX -1;
+            this.mostrar();
+            
+        }
 
     };
 
     this.moverDireita = function () {
-        
-        centroX = centroX + tamanho;
-        
-        
-    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
+        if (centroX < 8 && centroY < 13) {
+            centroX = centroX + 1;
+            this.mostrar();
+        }
 
     };
 
     this.moverBaixo = function () {
-        
-        centroY = centroY + tamanho;
-        
-        
-    div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
-    
-    
-    div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-            + "px;background:"+ cor +";top:" + (centroY + (tamanho * 2)) + "px;left:" + (centroX + tamanho)
-            + "px;position:absolute;border: solid 1px;");
+        if (centroY < 13) {
+            centroY = centroY + 1;
+            this.mostrar();
+        }
 
     };
 
     this.rodar = function () {
-
-        if(div1.getAttribute("top") ){
-            
+        
+        if(orientacao === 1){
+             if(centroY < 13 && centroX < 9 && centroX > 1){
+                orientacao = orientacao + 1;
+            }
         }
+        if(orientacao === 2){
+             if(centroY < 14 && centroX < 8 && centroX > 1){
+                orientacao = orientacao + 1;
+            }
+        }
+        if(orientacao > 2){
+            orientacao = 1;
+        }
+        this.mostrar();
     };
 };
 
