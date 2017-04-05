@@ -14,14 +14,14 @@ I = function (x, y) {
 
 
     var div1 = document.createElement("div");
-    //var div2 = document.createElement("div");
+    var div2 = document.createElement("div");
     var div3 = document.createElement("div");
     var div4 = document.createElement("div");
     var css = "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
             + "px;background:" + cor + ";position:static;border: solid 1px;";
 
     div1.setAttribute("style", css);
-    //div2.setAttribute("style", css);
+    div2.setAttribute("style", css);
     div3.setAttribute("style", css);
     div4.setAttribute("style", css);
 
@@ -31,7 +31,7 @@ I = function (x, y) {
 
         if (orientacao === 1) {
             celula[centroX - 1 + centroY * 10].appendChild(div1);
-            //celula[centroX + centroY * 10].appendChild(div2);
+            celula[centroX + centroY * 10].appendChild(div2);
             celula[centroX + 1 + centroY * 10].appendChild(div3);
             celula[(centroX + 2) + centroY * 10].appendChild(div4);
         }
