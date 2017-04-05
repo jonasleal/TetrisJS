@@ -17,7 +17,7 @@ document.addEventListener("keydown", function (e) {
         tetramino.moverBaixo();
     }else
     //Rodar
-    if(e.keyCode === 32){
+     if(e.keyCode === 32){
         tetramino.rodar();
     }
     
