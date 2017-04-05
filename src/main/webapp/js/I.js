@@ -92,14 +92,19 @@ I = function (x, y) {
 
     this.moverBaixo = function () {
         if (orientacao === 1) {
-            if (centroY < 14) {
+            //if (centroY < 14) {
+               
+             if(colisao.baixo(centroY,centroX - 1) && colisao.baixo(centroY,centroX) && colisao.baixo(centroY,centroX + 1) &&
+                     colisao.baixo(centroY,centroX + 2)){
                 centroY = centroY + 1;
                 this.mostrar();
-            }
+             }
         }
 
         if (orientacao === 2) {
-            if (centroY < 12) {
+            //if (centroY < 12) {
+            
+            if(colisao.baixo(centroY+2,centroX)){
                 centroY = centroY + 1;
                 this.mostrar();
             }
