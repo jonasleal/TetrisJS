@@ -3,7 +3,7 @@
     <head>
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-       <script src="js/Colisao.js"></script>
+        <script src="js/Colisao.js"></script>
         <script src="js/MovimentoListener.js"></script>
         <script src="js/CSS.js"></script>
         <script src="js/Cenario.js"></script>
@@ -12,17 +12,19 @@
         <script src ="js/I.js"></script>
         <script src="js/L.js"></script>
         <script src="js/S.js"></script>
-        
+
     </head>
     <body>
 
 
         <script>
             var cenario = new Cenario();
-            var tetramino = new Quadrado(1 ,1);
-            var teste = new Quadrado(4,4);
-            teste.mostrar();
+            var tetramino ;
+
+            cenario.criaCentario();
+
             tetramino.mostrar();
+
 
         </script>
 
