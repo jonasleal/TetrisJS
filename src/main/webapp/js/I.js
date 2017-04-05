@@ -182,20 +182,9 @@ I = function (x, y) {
     
     
 
-    this.posiciona = function (x, y) {
-        centroX = x;
-        centroY = y;
-        div1.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY) + "px;left:" + (centroX)
-                + "px;position:absolute;border: solid 1px;");
-        div2.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY + tamanho) + "px;left:" + (centroX)
-                + "px;position:absolute;border: solid 1px;");
-        div3.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY) + "px;left:" + (centroX + tamanho)
-                + "px;position:absolute;border: solid 1px;");
-        div4.setAttribute("style", "width:" + (tamanho - 1) + "px;height:" + (tamanho - 1)
-                + "px;background:" + cor + ";top:" + (centroY + tamanho) + "px;left:" + (centroX + tamanho)
-                + "px;position:absolute;border: solid 1px;");
+    this.posiciona = function (linha, coluna) {
+        centroX = coluna;
+        centroY = linha;
+        
     };
 };
