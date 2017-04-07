@@ -6,6 +6,37 @@
 
 
 T = function (_coluna, _linha) {
+    desenhar = function (_linha, _coluna, _orientacao, _divs) {
+        var desenho = [];
+        switch (_orientacao) {
+            case 1:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
+                desenho[3] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                desenho[2] = new Posicao(_linha + 1, _coluna, _divs[3]);
+                break;
+            case 2:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
+                desenho[3] = new Posicao(_linha + 1, _coluna, _divs[2]);
+                desenho[2] = new Posicao(_linha, _coluna - 1, _divs[3]);
+                break;
+            case 3:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
+                desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
+                desenho[3] = new Posicao(_linha, _coluna - 1, _divs[3]);
+                break;
+            case 4:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha + 1, _coluna, _divs[1]);
+                desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                desenho[3] = new Posicao(_linha - 1, _coluna, _divs[3]);
+                break;
+        }
+        ;
+        return desenho;
+    };
     //Aparencia
     var tamanho = 30;
     var cor = "purple";
@@ -25,7 +56,7 @@ T = function (_coluna, _linha) {
     var centroColuna = _coluna;
     var centroLinha = _linha;
     var orientacao = 1;
-    var posicao = desenha(centroColuna, centroLinha, orientacao, [div1, div2, div3, div4]);
+    var posicao = desenhar(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
 
 
     //Interação
@@ -56,7 +87,7 @@ T = function (_coluna, _linha) {
                 centroColuna = centroColuna - 1;
             }
         }
-        posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        posicao = desenhar(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
     };
 
@@ -86,7 +117,7 @@ T = function (_coluna, _linha) {
                 centroColuna = centroColuna + 1;
             }
         }
-        posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        posicao = desenhar(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
     };
 
@@ -102,7 +133,7 @@ T = function (_coluna, _linha) {
                     colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhar(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         } else if (orientacao === 2) {
@@ -110,7 +141,7 @@ T = function (_coluna, _linha) {
                     colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhar(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         } else if (orientacao === 3) {
@@ -119,14 +150,14 @@ T = function (_coluna, _linha) {
                     colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhar(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         } else if (orientacao === 4) {
             if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
                     colisao.baixo(posicao[2].linha, posicao[2].coluna)) {
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhar(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         }
@@ -138,13 +169,13 @@ T = function (_coluna, _linha) {
     this.rodar = function () {
 
         if (orientacao > 0 && orientacao < 4) {
-            proximaPosicao = desenha(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
+            var proximaPosicao = desenhar(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao++;
                 posicao = proximaPosicao;
             }
         } else {
-            proximaPosicao = desenha(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
+            var proximaPosicao = desenhar(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao = 1;
                 posicao = proximaPosicao;
@@ -154,13 +185,13 @@ T = function (_coluna, _linha) {
     };
 
     this.mostrar = function () {
-        
+
         var tabela = document.getElementById("tabelaPrincipal");
         var celulas = tabela.getElementsByTagName("td");
 
 
         for (i = 0; i < 4; i++) {
-            celula = (posicao[i].coluna + posicao[i].linha * 10);
+            var celula = (posicao[i].coluna + posicao[i].linha * 10);
             if (celula >= 0) {
                 celulas[celula].appendChild(posicao[i].div);
             }
@@ -173,37 +204,4 @@ T = function (_coluna, _linha) {
         centroLinha = _linha;
 
     };
-
-};
-
-desenha = function (_linha, _coluna, _orientacao, _divs) {
-    desenho = [];
-    switch (_orientacao) {
-        case 1:
-            desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-            desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
-            desenho[3] = new Posicao(_linha, _coluna + 1, _divs[2]);
-            desenho[2] = new Posicao(_linha + 1, _coluna, _divs[3]);
-            break;
-        case 2:
-            desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-            desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
-            desenho[3] = new Posicao(_linha + 1, _coluna, _divs[2]);
-            desenho[2] = new Posicao(_linha, _coluna - 1, _divs[3]);
-            break;
-        case 3:
-            desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-            desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
-            desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
-            desenho[3] = new Posicao(_linha, _coluna - 1, _divs[3]);
-            break;
-        case 4:
-            desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-            desenho[1] = new Posicao(_linha + 1, _coluna, _divs[1]);
-            desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
-            desenho[3] = new Posicao(_linha - 1, _coluna, _divs[3]);
-            break;
-    }
-    ;
-    return desenho;
 };

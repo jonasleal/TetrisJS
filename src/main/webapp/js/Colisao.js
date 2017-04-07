@@ -63,8 +63,9 @@ Colisao = function () {
             var limiteLinha = proxima[0].linha - proxima[i].linha;
             var limiteColuna = proxima[0].coluna - proxima[i].coluna;
             
-            if(proxima[i].coluna > 10 + limiteColuna ||
-                    proxima[i].linha > 15 + limiteLinha){
+            if(proxima[i].coluna < -1 + limiteColuna ||
+                    proxima[i].coluna > 10 + limiteColuna ||
+                        proxima[i].linha > 15 + limiteLinha){
                 return false;
             }
             if (iProximo < celulas.length) {
