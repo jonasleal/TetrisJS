@@ -32,6 +32,8 @@ T = function (_coluna, _linha) {
     var colisao = new Colisao();
 
     this.moverEsquerda = function () {
+//        Verifica se o caminho esta livre para as peças da esquerda
+//        de acordo com a orientação atual do tetraminó
         if (orientacao === 1) {
             if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
                     colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
@@ -59,6 +61,8 @@ T = function (_coluna, _linha) {
     };
 
     this.moverDireita = function () {
+//        Verifica se o caminho esta livre para as peças da direita
+//        de acordo com a orientação atual do tetraminó
         if (orientacao === 1) {
             if (colisao.direita(posicao[2].linha, posicao[2].coluna) &&
                     colisao.direita(posicao[3].linha, posicao[3].coluna)) {
@@ -87,6 +91,10 @@ T = function (_coluna, _linha) {
     };
 
     this.moverBaixo = function () {
+//        Verifica se o caminho esta livre para as peças a baixo
+//        de acordo com a orientação atual do tetraminó e retorna true se
+//        houver movimento e false caso na haja possibilidade
+
         var moveu = false;
         if (orientacao === 1) {
             if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
@@ -125,25 +133,28 @@ T = function (_coluna, _linha) {
         this.mostrar();
         return moveu;
     };
-
+//        Verifica se ha espaço suficiente para a peça rodar e redesenha a peça
+//        na nova posição caso haja
     this.rodar = function () {
+
         if (orientacao > 0 && orientacao < 4) {
-            novaPosicao = desenha(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
-            if (colisao.proxima(novaPosicao)) {
+            proximaPosicao = desenha(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
+            if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao++;
-                posicao = novaPosicao;
+                posicao = proximaPosicao;
             }
         } else {
-            novaPosicao = desenha(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
-            if (colisao.proxima(novaPosicao)) {
+            proximaPosicao = desenha(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
+            if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao = 1;
-                posicao = novaPosicao;
+                posicao = proximaPosicao;
             }
         }
         this.mostrar();
     };
 
     this.mostrar = function () {
+        
         var tabela = document.getElementById("tabelaPrincipal");
         var celulas = tabela.getElementsByTagName("td");
 

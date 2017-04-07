@@ -50,21 +50,35 @@ Colisao = function () {
         return false;
     };
 
-    this.proxima = function (posicao) {
+    this.proxima = function (atual, proxima) {
         var tabela = document.getElementById("tabelaPrincipal");
         var celulas = tabela.getElementsByTagName("td");
 
+        iAtualP1 = atual[1].coluna + (atual[1].linha * 10);
+        iAtualP2 = atual[2].coluna + (atual[2].linha * 10);
+        iAtualP3 = atual[3].coluna + (atual[3].linha * 10);
+
         for (i = 1; i < 4; i++) {
-            indice = (posicao[i].coluna + (posicao[i].linha * 10));
-            if (indice <= celulas.length) {
-                child = celulas[indice].childElementCount;
-                if (child > 0) {
-                    return false;
+            iProximo = (proxima[i].coluna + (proxima[i].linha * 10));
+            var limiteLinha = proxima[0].linha - proxima[i].linha;
+            var limiteColuna = proxima[0].coluna - proxima[i].coluna;
+            
+            if(proxima[i].coluna > 10 + limiteColuna ||
+                    proxima[i].linha > 15 + limiteLinha){
+                return false;
+            }
+            if (iProximo < celulas.length) {
+                if (iProximo !== iAtualP1 && iProximo !== iAtualP2 && iProximo !== iAtualP3) {
+                    child = celulas[iProximo].childElementCount;
+                    if (child > 0) {
+                        return false;
+                    }
                 }
             }
         }
-        return posicao;
+        return proxima;
     };
 };
+
 
 
