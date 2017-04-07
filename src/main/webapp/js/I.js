@@ -30,24 +30,24 @@ I = function (x, y) {
         var celula = tabela.getElementsByTagName("td");
 
         if (orientacao === 1) {
-            
-            posicao =centroX - 1 + centroY * 10;
-            if(posicao >= 0 ){
+
+            posicao = centroX - 1 + centroY * 10;
+            if (posicao >= 0) {
                 celula[posicao].appendChild(div1);
             }
-            
+
             posicao = centroX + centroY * 10;
-            if(posicao>=0){
+            if (posicao >= 0) {
                 celula[posicao].appendChild(div2);
             }
-            
+
             posicao = centroX + 1 + centroY * 10;
-            if(posicao>= 0){
-               celula[posicao].appendChild(div3);
+            if (posicao >= 0) {
+                celula[posicao].appendChild(div3);
             }
-            
+
             posicao = (centroX + 2) + centroY * 10;
-            if(posicao>=0){
+            if (posicao >= 0) {
                 celula[posicao].appendChild(div4);
             }
         }
@@ -55,25 +55,25 @@ I = function (x, y) {
 
         if (orientacao === 2) {
             posicao = centroX + (centroY - 1) * 10;
-            if(posicao>=0){
+            if (posicao >= 0) {
                 celula[posicao].appendChild(div1);
             }
-            
+
             posicao = centroX + centroY * 10;
-            if(posicao>=0){
+            if (posicao >= 0) {
                 celula[posicao].appendChild(div2);
             }
-            
+
             posicao = centroX + (centroY + 1) * 10;
-            if(posicao>=0){
+            if (posicao >= 0) {
                 celula[posicao].appendChild(div3);
             }
-            
+
             posicao = centroX + (centroY + 2) * 10;
-            if(posicao>=0){
+            if (posicao >= 0) {
                 celula[posicao].appendChild(div4);
             }
-            
+
         }
 
     };
@@ -85,7 +85,7 @@ I = function (x, y) {
                 centroX = centroX - 1;
             }
 
-            
+
             this.mostrar();
 
 
@@ -101,7 +101,7 @@ I = function (x, y) {
     };
 
     this.moverDireita = function () {
-        
+
         if (orientacao === 1) {
             //if (centroX < 7 && centroY < 14) {
 
@@ -135,10 +135,10 @@ I = function (x, y) {
                 centroY = centroY + 1;
                 this.mostrar();
                 return true;
-                
+
             }
 
-            
+
         }
 
         if (orientacao === 2) {
@@ -149,7 +149,7 @@ I = function (x, y) {
                 this.mostrar();
                 return true;
             }
-         return false;   
+            return false;
         }
 
 
@@ -160,37 +160,37 @@ I = function (x, y) {
     this.rodar = function () {
 
 
-        if (orientacao === 1 ) {
-            
-            if( centroY < 14 && centroY >= 1){
-                
+        if (orientacao === 1) {
+
+            if (centroY < 14 && centroY >= 1) {
+
                 orientacao = orientacao + 1;
-                
+
             }
-            
-            
+
+
         } else
         // Esse if verifica se o I quando em pé esta do lado da parede esquerda, ou direita, ou no chão    
-        if (orientacao === 2  ) {
-            
-            if(centroY < 12 && centroX > 0 && centroX < 8){
-                
-                    orientacao = orientacao + 1;
-                    
+        if (orientacao === 2) {
+
+            if (centroY < 12 && centroX > 0 && centroX < 8) {
+
+                orientacao = orientacao + 1;
+
             }
         }
 
         if (orientacao > 2) {
-            
+
             orientacao = 1;
         }
         this.mostrar();
 
     };
-    
+
     this.posiciona = function (coluna, linha) {
         centroX = coluna;
         centroY = linha;
-        
+
     };
 };
