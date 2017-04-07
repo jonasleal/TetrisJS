@@ -49,5 +49,22 @@ Colisao = function () {
         }
         return false;
     };
+
+    this.proxima = function (posicao) {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celulas = tabela.getElementsByTagName("td");
+
+        for (i = 1; i < 4; i++) {
+            indice = (posicao[i].coluna + (posicao[i].linha * 10));
+            if (indice <= celulas.length) {
+                child = celulas[indice].childElementCount;
+                if (child > 0) {
+                    return false;
+                }
+            }
+        }
+        return posicao;
+    };
 };
+
 
