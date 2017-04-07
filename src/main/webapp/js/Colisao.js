@@ -23,11 +23,11 @@ Colisao = function () {
     };
     this.direita = function (linha, coluna) {
         var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
+        var celular = tabela.getElementsByTagName("td");
         if (coluna < 9 && linha < 14) {
             posicao = coluna + 1 + (linha * 10);
             if (posicao >= 0) {
-                child = celula[posicao].childElementCount;
+                child = celular[posicao].childElementCount;
                 if (child === 0) {
                     return true;
                 }
@@ -40,9 +40,9 @@ Colisao = function () {
     };
     this.baixo = function (linha, coluna) {
         var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
+        var celulas = tabela.getElementsByTagName("td");
         if (linha < 14) {
-            child = celula[coluna + (linha * 10) + 10].childElementCount;
+            child = celulas[coluna + (linha * 10) + 10].childElementCount;
             if (child === 0) {
                 return true;
             }

@@ -22,9 +22,9 @@ Cenario = function () {
     };
 
     sorteio = function () {
-        sorteado  = Math.floor(Math.random() * 3);
+        sorteado = Math.floor(Math.random() * 2);
         console.log(sorteado);
-        var tetraminos = [new Quadrado(4, 0), new I(4, 0), new T( 4,0)];
+        var tetraminos = [new Quadrado(4, 0), new I(4, 0)];
         return tetraminos[sorteado];
     };
 
@@ -39,13 +39,31 @@ Cenario = function () {
         tetramino.posiciona(4, 0);
         tetramino.mostrar();
         proximo = (sorteio());
-        
+
     };
 
     interacao = function () {
         if (!tetramino.moverBaixo()) {
             proximaJogada();
         }
+    };
+
+    verificaVencedor = function () {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celula = tabela.getElementsByTagName("td");
+
+        for (i = 10; i >= 10; i--) {
+            hit = 0;
+            posicao = 0;
+            for(j = 0; j < 10; j++){
+                posicao = i * 10 + j;
+                if(celula[posicao].childElementCount === 0){
+                    hit++;
+                }
+            }
+            
+        }
+
     };
     this.criaCentario = function () {
         divPrincipal.setAttribute("id", "divPrincipal");
@@ -96,7 +114,7 @@ Cenario = function () {
         div1.appendChild(div2);
         document.body.appendChild(div1);
 
-      //iniciarJogo();
+        //iniciarJogo();
     };
 
 };
