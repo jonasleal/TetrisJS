@@ -3,5 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+Rotacao = function () {
+    this.horaria = function (pivo, p1, p2, p3) {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celula = tabela.getElementsByTagName("td");
+        t = [pivo, p1, p2, p3];
+        nt = [pivo, p1, p2, p3];
 
+        for (i = 1; i < 4; i++) {
+            col = t[i].linha - t[0].linha;
+            lin = t[i].coluna - t[0].coluna;
+            lin = lin + t[0].linha;
+            col = col + t[0].coluna;
+            nt[i] = new Posicao(lin, col);
+            posicao = nt[i].coluna + nt[i].linha * 10;
+            if (posicao <= celula.length) {
+                child = celula[posicao].childElementCount;
+                if (child < 0) {
+                    return false;
+                }
+            }
+        }
+        return nt;
+    };
+};
 
