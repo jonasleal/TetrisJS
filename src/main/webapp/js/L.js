@@ -5,7 +5,7 @@
  */
 L = function (_coluna, _linha) {
 
-    desenha = function (_linha, _coluna, _orientacao, _divs) {
+    desenhaL = function (_linha, _coluna, _orientacao, _divs) {
         var desenho = [];
         switch (_orientacao) {
             case 1:
@@ -55,7 +55,7 @@ L = function (_coluna, _linha) {
     var centroColuna = _coluna;
     var centroLinha = _linha;
     var orientacao = 1;
-    var posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+    var posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
 
 
 
@@ -72,7 +72,8 @@ L = function (_coluna, _linha) {
                 centroColuna = centroColuna - 1;
             }
         } else if (orientacao === 2) {
-            if (colisao.esquerda(posicao[2].linha, posicao[2].coluna &&
+            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna &&
+                    colisao.esquerda(posicao[2].linha, posicao[2].coluna) &&
                     colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
                 centroColuna = centroColuna - 1;
             }
@@ -88,7 +89,7 @@ L = function (_coluna, _linha) {
                 centroColuna = centroColuna - 1;
             }
         }
-        posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
     };
 
@@ -118,7 +119,7 @@ L = function (_coluna, _linha) {
                 centroColuna = centroColuna + 1;
             }
         }
-        posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
     };
 
@@ -133,7 +134,7 @@ L = function (_coluna, _linha) {
                     colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         } else if (orientacao === 2) {
@@ -142,7 +143,7 @@ L = function (_coluna, _linha) {
                     colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         } else if (orientacao === 3) {
@@ -150,7 +151,7 @@ L = function (_coluna, _linha) {
                     colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         } else if (orientacao === 4) {
@@ -158,7 +159,7 @@ L = function (_coluna, _linha) {
                     colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
                     colisao.baixo(posicao[2].linha, posicao[2].coluna)) {
                 centroLinha = centroLinha + 1;
-                posicao = desenha(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
                 moveu = true;
             }
         }
@@ -170,13 +171,13 @@ L = function (_coluna, _linha) {
     this.rodar = function () {
 
         if (orientacao > 0 && orientacao < 4) {
-            var proximaPosicao = desenha(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
+            var proximaPosicao = desenhaL(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao++;
                 posicao = proximaPosicao;
             }
         } else {
-            var proximaPosicao = desenha(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
+            var proximaPosicao = desenhaL(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao = 1;
                 posicao = proximaPosicao;
@@ -186,13 +187,13 @@ L = function (_coluna, _linha) {
     };
 
     this.mostrar = function () {
-
         var tabela = document.getElementById("tabelaPrincipal");
         var celulas = tabela.getElementsByTagName("td");
-
-
-        for (i = 0; i < 4; i++) {
+        for (var i = 0; i < 4; i++) {
             var celula = (posicao[i].coluna + posicao[i].linha * 10);
+            if (posicao[i].div.parentNode) {
+                posicao[i].div.parentNode.removeChild(posicao[i].div);
+            }
             if (celula >= 0) {
                 celulas[celula].appendChild(posicao[i].div);
             }
@@ -205,5 +206,4 @@ L = function (_coluna, _linha) {
         centroLinha = _linha;
 
     };
-    desenha
 };

@@ -35,8 +35,8 @@ I = function (coluna, linha) {
         var tabela = document.getElementById("tabelaPrincipal");
         var celulas = tabela.getElementsByTagName("td");
 
-        for (i = 0; i < 4; i++) {
-            celula = (posicao[i].coluna + posicao[i].linha * 10);
+        for (var i = 0; i < 4; i++) {
+            var celula = (posicao[i].coluna + posicao[i].linha * 10);
             if (celula >= 0) {
                 celulas[celula].appendChild(posicao[i].div);
             }
