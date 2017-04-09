@@ -53,6 +53,7 @@ T = function (_coluna, _linha) {
     div4.setAttribute("style", css);
 
     //Localização
+    var pai = document.getElementById("tabelaPreview");
     var centroColuna = _coluna;
     var centroLinha = _linha;
     var orientacao = 1;
@@ -186,8 +187,7 @@ T = function (_coluna, _linha) {
     };
 
     this.mostrar = function () {
-        var tabela = document.getElementById("tabelaPrincipal");
-        var celulas = tabela.getElementsByTagName("td");
+        var celulas = pai.getElementsByTagName("td");
         for (i = 0; i < 4; i++) {
             var celula = (posicao[i].coluna + posicao[i].linha * 10);
             if (posicao[i].div.parentNode) {
@@ -200,9 +200,10 @@ T = function (_coluna, _linha) {
 
     };
 
-    this.posiciona = function (_coluna, _linha) {
-        centroColuna = _coluna;
-        centroLinha = _linha;
-
+    this.posiciona = function () {
+        centroColuna = 4;
+        centroLinha = -2;
+        posicao = desenhaT(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        pai = document.getElementById("tabelaPrincipal");
     };
 };

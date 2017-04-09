@@ -41,16 +41,23 @@ Colisao = function () {
     this.baixo = function (linha, coluna) {
         var tabela = document.getElementById("tabelaPrincipal");
         var celulas = tabela.getElementsByTagName("td");
-        if (linha < 14) {
+        var retorno = false;
+        
+        if (linha < -1) {
+            retorno = true;
+        }else if (linha < 14 && linha > -2) {
             var child = celulas[coluna + (linha * 10) + 10].childElementCount;
             if (child === 0) {
-                return true;
-            } 
+                retorno = true;
+            }else if(linha === -1){
+                fimDeJogo();
+            }
+
+        
+        
         }
-        if(linha < 0){
-            return -1;
-        }
-        return false;
+
+        return retorno;
     };
 
     this.proxima = function (atual, proxima) {
@@ -65,10 +72,10 @@ Colisao = function () {
             var iProximo = (proxima[i].coluna + (proxima[i].linha * 10));
             var limiteLinha = proxima[0].linha - proxima[i].linha;
             var limiteColuna = proxima[0].coluna - proxima[i].coluna;
-            
-            if(proxima[i].coluna < -1 + limiteColuna ||
+
+            if (proxima[i].coluna < -1 + limiteColuna ||
                     proxima[i].coluna > 10 + limiteColuna ||
-                        proxima[i].linha > 15 + limiteLinha){
+                    proxima[i].linha > 15 + limiteLinha) {
                 return false;
             }
             if (iProximo > 0 && iProximo < celulas.length) {

@@ -5,8 +5,8 @@
  */
 
 Cenario = function () {
-    var largura = 341;
-    var altura = 510;
+    var largura = 330;
+    var altura = 495;
     var proximo;
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
@@ -14,12 +14,34 @@ Cenario = function () {
     var divPreview = document.createElement("div");
     var divStatus = document.createElement("div");
     var idIntervalo;
-    var temMovimento = true;
+    var idTempo;
+    var pontuacao = 0;
+    var nodePontuacao;
+    var nodeTempo;
+    var s = 0;
+    var m = 0;
+    var h = 0;
+
     iniciarJogo = function () {
-        tetramino = (sorteio());
         proximo = (sorteio());
-        idIntervalo = setInterval(interacao, 1000);
+        proximaJogada();
+        idIntervalo = setInterval(interacao, 800);
+        idTempo = setInterval(contarTempo, 1000);
     };
+
+    contarTempo = function () {
+        s++;
+        if(s === 60){
+            m++;
+            s=0;
+        };
+        if(m === 60){
+            h++;
+            m=0;
+        }
+        nodeTempo.data = h + ":" + m + ":" + s;
+    };
+
     gameOver = function () {
         var clearIn = clearInterval(idIntervalo);
         console.log(clearIn);
@@ -28,7 +50,7 @@ Cenario = function () {
     sorteio = function () {
         var sorteado = Math.floor(Math.random() * 3);
         console.log(sorteado);
-        var tetraminos = [new Quadrado(4, -1), new T(4, -1), new L(4, -1)];
+        var tetraminos = [new Quadrado(4, 4), new T(4, 4), new L(4, 4)];
         return tetraminos[sorteado];
     };
 
@@ -40,21 +62,34 @@ Cenario = function () {
 
     proximaJogada = function () {
         tetramino = proximo;
-        tetramino.posiciona(4, -1);
+        tetramino.posiciona();
         tetramino.mostrar();
         proximo = (sorteio());
+        proximo.mostrar();
+
+    };
+
+    fimDeJogo = function () {
+        var tabela = document.getElementById("tabelaPrincipal");
+        var celula = tabela.getElementsByTagName("td");
+
+        clearInterval(idIntervalo);
+        clearInterval(idTempo);
+        console.log("Fim de jogo");
 
     };
 
     interacao = function () {
-
         if (tetramino) {
-            if (!tetramino.moverBaixo()) {
-                verificaParede();
-                proximaJogada();
-
-            } else {
-                temMovimento = false;
+            switch (tetramino.moverBaixo()) {
+                case 0:
+                    fimDeJogo();
+                    break;
+                case false:
+                    pontuacao = pontuacao + verificaParede();
+                    nodePontuacao.data = pontuacao;
+                    proximaJogada();
+                    break;
             }
         }
     };
@@ -62,7 +97,7 @@ Cenario = function () {
     verificaParede = function () {
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
-        var reposicionar = false;
+        var hit = 0;
         for (var i = 14; i >= 0; i--) {
             var blocos = 0;
             var posicao = 0;
@@ -92,54 +127,20 @@ Cenario = function () {
                         }
                     }
                     i++;
+                    hit++;
                 }
             }
 
         }
+        return 100 * hit;
 
     };
-    this.criaCentario = function () {
-        divPrincipal.setAttribute("id", "divPrincipal");
-        divPrincipal.setAttribute("style", "background:gainsboro; width:" + largura + "px; height:" + altura + "px; border: solid brown 30px; float: left;");
-        divPreview.setAttribute("id", "divPreview");
-        divPreview.setAttribute("style", "background:gainsboro; margin-top : 30px; width:" + 150 + "px; height:" + 125 + "px; border: solid black 2px;");
-        divStatus.setAttribute("id", "divStatus");
-        divStatus.setAttribute("style", "background:gainsboro; width:" + 150 + "px; height:" + 350 + "px; top : 500px; left : 500px border: solid black 2px;");
+    this.construir = function () {
         div2.setAttribute("style", "float: left");
 
-        var tabelaPrincipal = document.createElement("table");
-        tabelaPrincipal.setAttribute("id", "tabelaPrincipal");
-        tabelaPrincipal.setAttribute("style", "border-collapse: collapse;border: 1px solid black;");
-        for (var i = 0; i < 15; i++) {
-            var linha = document.createElement("tr");
-            //linha.setAttribute("style", "border: 1px solid black;");
-            for (var j = 0; j < 10; j++) {
-                var coluna = document.createElement("td");
-                coluna.setAttribute("style", "width: 31px;height: 31px;border: 1px solid black;");
-                linha.appendChild(coluna);
-            }
-            tabelaPrincipal.appendChild(linha);
-
-        }
-
-        var tabelaPreview = document.createElement("tabela");
-        tabelaPreview.setAttribute("id", "tabelaPreview");
-        tabelaPreview.setAttribute("style", "border-collapse: collapse;border: 1px solid black;");
-        for (var i = 0; i < 4; i++) {
-            var linha = document.createElement("tr");
-            for (var j = 0; j < 4; j++) {
-                var coluna = document.createElement("td");
-                coluna.setAttribute("style", "width: 31px;height: 31px;border: 1px solid black;");
-                linha.appendChild(coluna);
-            }
-            tabelaPreview.appendChild(linha);
-
-        }
-
-
-        divPrincipal.appendChild(tabelaPrincipal);
-        // divPreview.appendChild(tabelaPreview);
-        //divPreview.appendChild(tabelaPreview);
+        criaCenario();
+        criaPreview();
+        criaStatus();
 
         div1.appendChild(divPrincipal);
         div2.appendChild(divPreview);
@@ -150,7 +151,99 @@ Cenario = function () {
         iniciarJogo();
     };
 
+    criaStatus = function () {
+        divStatus.setAttribute("id", "divStatus");
+        divStatus.setAttribute("style", "background:gainsboro; width:" + 150 +
+                "px; height:" + 350 + "px; top : 500px; left : 500px; border: solid black 2px;");
 
+        var tabelaStatus = document.createElement("table");
+        tabelaStatus.setAttribute("style", "border-collapse: collapse;border: 1px solid black;" +
+                "position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);");
+
+
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        tr.appendChild(td);
+        var b = document.createElement("b");
+        td.appendChild(b);
+        var texto = document.createTextNode("SCORE");
+        b.appendChild(texto);
+        tabelaStatus.appendChild(tr);
+
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        tr.appendChild(td);
+        var b = document.createElement("b");
+        td.appendChild(b);
+        nodePontuacao = document.createTextNode(pontuacao);
+        b.appendChild(nodePontuacao);
+        tabelaStatus.appendChild(tr);
+
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        tr.appendChild(td);
+        var b = document.createElement("b");
+        td.appendChild(b);
+        var texto = document.createTextNode("TIME");
+        b.appendChild(texto);
+        tabelaStatus.appendChild(tr);
+
+        var tr = document.createElement("tr");
+        var td = document.createElement("td");
+        tr.appendChild(td);
+        var b = document.createElement("b");
+        td.appendChild(b);
+        nodeTempo = document.createTextNode("00:00:00");
+        b.appendChild(nodeTempo);
+        tabelaStatus.appendChild(tr);
+
+        divStatus.appendChild(tabelaStatus);
+    };
+
+    criaPreview = function () {
+        divPreview.setAttribute("id", "divPreview");
+        divPreview.setAttribute("style", "background:gainsboro; margin-top : 30px; width:" + 150 + "px; height:" + 140 + "px; border: solid black 2px;");
+
+        var tabelaPreview = document.createElement("table");
+        tabelaPreview.setAttribute("id", "tabelaPreview");
+        tabelaPreview.setAttribute("style", "border-collapse: collapse; position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%);");
+        for (var i = 0; i < 10; i++) {
+            var linha = document.createElement("tr");
+            for (var j = 0; j < 10; j++) {
+                var coluna = document.createElement("td");
+//                coluna.setAttribute("style", "border: 1px solid black;");
+                linha.appendChild(coluna);
+            }
+            tabelaPreview.appendChild(linha);
+
+        }
+        divPreview.appendChild(tabelaPreview);
+
+
+    };
+
+    criaCenario = function () {
+        divPrincipal.setAttribute("id", "divPrincipal");
+        divPrincipal.setAttribute("style", "background:gainsboro; width:" + largura + "px; height:" + altura + "px; border: solid brown 30px; float: left;");
+
+        var tabelaPrincipal = document.createElement("table");
+        tabelaPrincipal.setAttribute("id", "tabelaPrincipal");
+        tabelaPrincipal.setAttribute("style", "border-collapse: collapse;");
+        for (var i = 0; i < 15; i++) {
+            var linha = document.createElement("tr");
+            //linha.setAttribute("style", "border: 1px solid black;");
+            for (var j = 0; j < 10; j++) {
+                var coluna = document.createElement("td");
+                coluna.setAttribute("style", "width: 31px;height: 31px;");
+                linha.appendChild(coluna);
+            }
+            tabelaPrincipal.appendChild(linha);
+
+        }
+
+        divPrincipal.appendChild(tabelaPrincipal);
+
+    };
 };
 
 
