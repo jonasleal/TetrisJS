@@ -44,6 +44,7 @@ Cenario = function () {
 
     gameOver = function () {
         var clearIn = clearInterval(idIntervalo);
+        clearInterval(idTempo);
         console.log(clearIn);
     };
 
