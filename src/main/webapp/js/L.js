@@ -3,15 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-L = function (x, y) {
+L = function (_coluna, _linha) {
 
-    var centroX = x;
-    var centroY = y;
+    desenhaL = function (_linha, _coluna, _orientacao, _divs) {
+        var desenho = [];
+        switch (_orientacao) {
+            case 1:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
+                desenho[2] = new Posicao(_linha + 1, _coluna, _divs[2]);
+                desenho[3] = new Posicao(_linha + 1, _coluna + 1, _divs[3]);
+                break;
+            case 2:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
+                desenho[2] = new Posicao(_linha, _coluna - 1, _divs[2]);
+                desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
+                break;
+            case 3:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha + 1, _coluna, _divs[1]);
+                desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
+                desenho[3] = new Posicao(_linha - 1, _coluna - 1, _divs[3]);
+                break;
+            case 4:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
+                desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                desenho[3] = new Posicao(_linha - 1, _coluna + 1, _divs[3]);
+                break;
+        }
+        ;
+        return desenho;
+    };
+//Aparencia
     var tamanho = 30;
     var cor = "orange";
-    var orientacao = 1;
-    var colisao = new Colisao();
-    
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
     var div3 = document.createElement("div");
@@ -24,253 +51,162 @@ L = function (x, y) {
     div3.setAttribute("style", css);
     div4.setAttribute("style", css);
 
+    //Localização
+    var pai = document.getElementById("tabelaPreview");
+    var centroColuna = _coluna;
+    var centroLinha = _linha;
+    var orientacao = 1;
+    var posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
 
 
 
-    this.mostrar = function () {
-        var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
+    //Interação
+    var colisao = new Colisao();
 
-        if (orientacao === 1) {
-            
-            posicao = centroX + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div1);
-            }
-        
-            posicao = centroX + 1 + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div2);
-            }
-            
-            posicao = centroX + (centroY - 1) * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div3);
-            }
-            
-            posicao = centroX + (centroY - 2) * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div4);
-            }
-        }
-        
-        if(orientacao === 2){
-            posicao = centroX + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div1);
-            }
-            
-            posicao = centroX + (centroY + 1) * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div2);
-            }
-            
-            posicao = centroX + 1 + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div3);
-            }
-            
-            posicao = centroX + 2 + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div4);
-            }
-            
-              
-        }
-        if(orientacao === 3){
-            
-            posicao = centroX + centroY * 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div1);
-            }
-            
-            posicao = centroX - 1 + centroY * 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div2);
-            }
-            
-            posicao = centroX + (centroY + 1) * 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div3);
-            }
-            posicao = centroX + (centroY + 2) * 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div4);
-            }
-            
-        }
-        if(orientacao === 4){
-            
-            posicao = centroX + centroY * 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div1);
-            }
-            
-            posicao = centroX + (centroY - 1)* 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div2);
-            }
-            
-            posicao = centroX - 1 + centroY * 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div3);
-            }
-            posicao = centroX - 2 + centroY * 10;
-            if(posicao >= 0){
-                celula[posicao].appendChild(div4);
-            }
-            
-             
-        }
-        
-        
-        
-    };
 
     this.moverEsquerda = function () {
-        var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
-        
-        if(orientacao ===  1){
-            if (centroX > 0 && centroY < 14) {
-                if (colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY - 1, centroX) && colisao.esquerda(centroY - 2, centroX)) {
-                    centroX = centroX - 1;
-                    this.mostrar();
-                }
+//        Verifica se o caminho esta livre para as peças da esquerda
+//        de acordo com a orientação atual do tetraminó
+        if (orientacao === 1) {
+            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
+                centroColuna = centroColuna - 1;
+            }
+        } else if (orientacao === 2) {
+            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna &&
+                    colisao.esquerda(posicao[2].linha, posicao[2].coluna) &&
+                    colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
+                centroColuna = centroColuna - 1;
+            }
+        } else if (orientacao === 3) {
+            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna - 1;
+            }
+        } else if (orientacao === 4) {
+            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna - 1;
             }
         }
-        if(orientacao === 2){
-            if (centroX > 0 && centroY < 13) {
-                if (colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY + 1, centroX)) {
-                    centroX = centroX - 1;
-                    this.mostrar();
-            
-                }
-            }
-        }
-        if(orientacao === 3){
-            if (centroX > 1 && centroY < 12) {
-                    if (colisao.esquerda(centroY, centroX - 1) && colisao.esquerda(centroY + 1, centroX) && colisao.esquerda(centroY + 2, centroX)) {
-                        centroX = centroX - 1;
-                        this.mostrar();
-                    }
-            }
-        }
-        if(orientacao === 4){
-            if (centroX > 2 && centroY < 12) {
-                if (colisao.esquerda(centroY, centroX - 2) && colisao.esquerda(centroY - 1, centroX)) {
-                    centroX = centroX - 1;
-                    this.mostrar();
-            }
-            }
-        }
+        posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        this.mostrar();
     };
 
     this.moverDireita = function () {
-        if(orientacao === 1){
-            if (centroX < 8 && centroY < 14) {
-                if (colisao.direita(centroY, centroX + 1) && colisao.direita(centroY - 1, centroX) && colisao.direita(centroY - 2, centroX)) {
-        
-                    centroX = centroX + 1;
-                    this.mostrar();
-                }
+//        Verifica se o caminho esta livre para as peças da direita
+//        de acordo com a orientação atual do tetraminó
+        if (orientacao === 1) {
+            if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.direita(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna + 1;
+            }
+        } else if (orientacao === 2) {
+            if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna + 1;
+            }
+        } else if (orientacao === 3) {
+            if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.direita(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.direita(posicao[2].linha, posicao[2].coluna)) {
+                centroColuna = centroColuna + 1;
+            }
+        } else if (orientacao === 4) {
+            if (colisao.direita(posicao[2].linha, posicao[2].coluna) &&
+                    colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna + 1;
             }
         }
-        if(orientacao === 2){
-            if (centroX < 7 && centroY < 13) {
-                if (colisao.direita(centroY, centroX + 2) && colisao.direita(centroY + 1, centroX)) {
-        
-                    centroX = centroX + 1;
-                    this.mostrar();
-                }
-            }
-        }
-        if(orientacao === 3){
-            if (centroX < 9 && centroY < 12) {
-                if (colisao.direita(centroY, centroX) && colisao.direita(centroY + 1, centroX) && colisao.direita(centroY + 2, centroX)) {
-                    centroX = centroX + 1;
-                    this.mostrar();
-                }
-            }
-        }
-        if(orientacao === 4){
-            if (centroX < 9 && centroY < 14) {
-                if (colisao.direita(centroY, centroX) && colisao.direita(centroY - 1, centroX) ) {
-                    centroX = centroX + 1;
-                    this.mostrar();
-                }
-            }
-        }
-        
+        posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        this.mostrar();
     };
 
     this.moverBaixo = function () {
-        if(orientacao === 1 ){
-            if (centroY < 14) {
-                if (colisao.baixo(centroY, centroX) && colisao.baixo(centroY , centroX +1)) {
-                    centroY = centroY + 1;
-                    this.mostrar();
-                }
-            }
-        }
-        if(orientacao === 2){
-             if (centroY < 13) {
-                if (colisao.baixo(centroY + 1, centroX) && colisao.baixo(centroY , centroX + 1) && colisao.baixo(centroY, centroX + 2)) {
-                    centroY = centroY + 1;
-                    this.mostrar();
-                }
-            }
-        }
-        if(orientacao === 3){
-             if (centroY < 12) {
-                if (colisao.baixo(centroY + 2 , centroX) && colisao.baixo(centroY , centroX - 1)) {
-                    centroY = centroY + 1;
-                    this.mostrar();
-                }
-            }
-        }
-        if(orientacao === 4){
-            if (centroY < 14) {
-                if (colisao.baixo(centroY, centroX) && colisao.baixo(centroY , centroX - 1) && colisao.baixo(centroY, centroX - 2)) {
-                    centroY = centroY + 1;
-                    this.mostrar();
-                }
-            }
-        }
-    };
+//        Verifica se o caminho esta livre para as peças a baixo
+//        de acordo com a orientação atual do tetraminó e retorna true se
+//        houver movimento e false caso na haja possibilidade
 
+        var moveu = false;
+        if (orientacao === 1) {
+            if (colisao.baixo(posicao[2].linha, posicao[2].coluna) &&
+                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                centroLinha = centroLinha + 1;
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                moveu = true;
+            }
+        } else if (orientacao === 2) {
+            if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                centroLinha = centroLinha + 1;
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                moveu = true;
+            }
+        } else if (orientacao === 3) {
+            if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                centroLinha = centroLinha + 1;
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                moveu = true;
+            }
+        } else if (orientacao === 4) {
+            if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.baixo(posicao[2].linha, posicao[2].coluna)) {
+                centroLinha = centroLinha + 1;
+                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                moveu = true;
+            }
+        }
+        this.mostrar();
+        return moveu;
+    };
+//        Verifica se ha espaço suficiente para a peça rodar e redesenha a peça
+//        na nova posição caso haja
     this.rodar = function () {
 
-        
-        
-        if(orientacao === 1){
-            if(centroY < 14 && centroX < 8 && centroX > 0){
-             orientacao = orientacao + 1;
+        if (orientacao > 0 && orientacao < 4) {
+            var proximaPosicao = desenhaL(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
+            if (colisao.proxima(posicao, proximaPosicao)) {
+                orientacao++;
+                posicao = proximaPosicao;
             }
-        }else
-        if(orientacao === 2){
-            if(centroY < 13 && centroX < 8 && centroX > 0){
-                orientacao = orientacao + 1;
-            }
-        }else
-        if(orientacao === 3){
-            if(centroY < 12 && centroX < 9 && centroX > 1){
-                orientacao = orientacao + 1;
-            }
-        }else
-        if (orientacao === 4){
-            if(centroY < 14 && centroX < 9 && centroX > 1){
-                orientacao = orientacao + 1;
+        } else {
+            var proximaPosicao = desenhaL(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
+            if (colisao.proxima(posicao, proximaPosicao)) {
+                orientacao = 1;
+                posicao = proximaPosicao;
             }
         }
-        if(orientacao > 4){
-            orientacao = 1;
-        }
-        
         this.mostrar();
     };
+
+    this.mostrar = function () {
+       
+        var celulas = pai.getElementsByTagName("td");
+        for (var i = 0; i < 4; i++) {
+            var celula = (posicao[i].coluna + posicao[i].linha * 10);
+            if (posicao[i].div.parentNode) {
+                posicao[i].div.parentNode.removeChild(posicao[i].div);
+            }
+            if (celula >= 0) {
+                celulas[celula].appendChild(posicao[i].div);
+            }
+        }
+
+    };
+
+    this.posiciona = function () {
+        centroColuna = 4;
+        centroLinha = -2;
+        posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        pai = document.getElementById("tabelaPrincipal");
+    };
 };
-
-
-
-

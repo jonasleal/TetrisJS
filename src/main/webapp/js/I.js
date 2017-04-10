@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-I = function (x, y) {
-
-    var centroX = x;
-    var centroY = y;
+I = function (coluna, linha) {
+    var posicao = [];
+    var centroX = coluna;
+    var centroY = linha;
     var tamanho = 30;
     var cor = "aqua";
     var orientacao = 1;
@@ -25,53 +25,22 @@ I = function (x, y) {
     div3.setAttribute("style", css);
     div4.setAttribute("style", css);
 
+
+
+    posicao[0] = new Posicao(linha, coluna, div1);
+    posicao[1] = new Posicao(posicao[0].linha, posicao[0].coluna - 1, div2);
+    posicao[2] = new Posicao(posicao[0].linha, posicao[0].coluna + 1, div3);
+    posicao[3] = new Posicao(posicao[0].linha, posicao[0].coluna + 2, div4);
+
+
     this.mostrar = function () {
         var tabela = document.getElementById("tabelaPrincipal");
-        var celula = tabela.getElementsByTagName("td");
+        var celulas = tabela.getElementsByTagName("td");
 
-        if (orientacao === 1) {
-
-            posicao = centroX - 1 + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div1);
-            }
-
-            posicao = centroX + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div2);
-            }
-
-            posicao = centroX + 1 + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div3);
-            }
-
-            posicao = (centroX + 2) + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div4);
-            }
-        }
-
-
-        if (orientacao === 2) {
-            posicao = centroX + (centroY - 1) * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div1);
-            }
-
-            posicao = centroX + centroY * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div2);
-            }
-
-            posicao = centroX + (centroY + 1) * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div3);
-            }
-
-            posicao = centroX + (centroY + 2) * 10;
-            if (posicao >= 0) {
-                celula[posicao].appendChild(div4);
+        for (var i = 0; i < 4; i++) {
+            var celula = (posicao[i].coluna + posicao[i].linha * 10);
+            if (celula >= 0) {
+                celulas[celula].appendChild(posicao[i].div);
             }
 
         }
@@ -160,32 +129,10 @@ I = function (x, y) {
     this.rodar = function () {
 
 
-        if (orientacao === 1) {
+        r = new Rotacao();
+        posicao = r.horaria(posicao[0], posicao[1], posicao[2], posicao[3]);
 
-            if (centroY < 14 && centroY >= 1) {
-
-                orientacao = orientacao + 1;
-
-            }
-
-
-        } else
-        // Esse if verifica se o I quando em pé esta do lado da parede esquerda, ou direita, ou no chão    
-        if (orientacao === 2) {
-
-            if (centroY < 12 && centroX > 0 && centroX < 8) {
-
-                orientacao = orientacao + 1;
-
-            }
-        }
-
-        if (orientacao > 2) {
-
-            orientacao = 1;
-        }
         this.mostrar();
-
     };
 
     this.posiciona = function (coluna, linha) {
