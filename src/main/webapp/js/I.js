@@ -124,10 +124,12 @@ I = function (coluna, linha) {
     };
 
     this.rodar = function () {
+
         r = new Rotacao();
         posicao = r.horaria(posicao[0], posicao[1], posicao[2], posicao[3]);
         this.mostrar();
     };
+
 
     this.posiciona = function (coluna, linha) {
         centroX = coluna;

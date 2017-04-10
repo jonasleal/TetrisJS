@@ -63,6 +63,7 @@ L = function (_coluna, _linha) {
     //Interação
     var colisao = new Colisao();
 
+
     this.moverEsquerda = function () {
 //        Verifica se o caminho esta livre para as peças da esquerda
 //        de acordo com a orientação atual do tetraminó

@@ -60,8 +60,9 @@ T = function (_coluna, _linha) {
     var posicao = desenhaT(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
 
 
-    //Interação
+//Interação
     var colisao = new Colisao();
+
 
     this.moverEsquerda = function () {
 //        Verifica se o caminho esta livre para as peças da esquerda
@@ -205,5 +206,6 @@ T = function (_coluna, _linha) {
         centroLinha = -2;
         posicao = desenhaT(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         pai = document.getElementById("tabelaPrincipal");
+
     };
 };

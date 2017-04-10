@@ -11,7 +11,8 @@ S = function (x, y){
     var tamanho = 30;
     var cor = "green";
     var orientacao = 1;
-    
+    var colisao = new Colisao(); 
+     
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
     var div3 = document.createElement("div");
@@ -32,16 +33,47 @@ S = function (x, y){
         var celula = tabela.getElementsByTagName("td");
 
         if (orientacao === 1) {
-            celula[centroX + 1 + centroY * 10].appendChild(div1);
-            celula[centroX + centroY * 10].appendChild(div2);
-            celula[centroX + (centroY - 1) * 10].appendChild(div3);
-            celula[centroX + 1 + (centroY + 1) * 10].appendChild(div4);
+            
+            posicao = centroX + 1 + centroY * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div1);
+            }
+            posicao = centroX + centroY * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div2);
+            }
+            
+            posicao = centroX + (centroY - 1) * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div3);
+            }
+            posicao = centroX + 1 + (centroY + 1) * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div4);
+            }
+            
         }
         if(orientacao === 2){
-            celula[centroX + 1 + centroY * 10].appendChild(div1);
-            celula[centroX + 1 + (centroY - 1) * 10].appendChild(div2);
-            celula[centroX + 2 + centroY * 10].appendChild(div3);
-            celula[centroX - 1 + (centroY - 1) * 10].appendChild(div4);
+            
+            posicao = centroX + 1 + centroY * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div1);
+            }
+            posicao = centroX + 1 + (centroY - 1) * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div2);
+            }
+            
+            posicao = centroX + 2 + (centroY - 1) * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div3);
+            }
+            
+            posicao = centroX  + centroY  * 10;
+            if(posicao >= 0){
+                celula[posicao].appendChild(div4);
+            }
+            
      
         }
     };
@@ -50,40 +82,75 @@ S = function (x, y){
         var tabela = document.getElementById("tabelaPrincipal");
         var celula = tabela.getElementsByTagName("td");
 
-        if (centroX > 0 && centroY < 13) {
+        if(orientacao === 1){
+            if (centroX > 0 && centroY < 13) {
+                if(colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY - 1, centroX) && colisao.esquerda(centroY + 1, centroX + 1)){
+                centroX = centroX -1;
+                this.mostrar();
             
-            centroX = centroX -1;
-            this.mostrar();
-            
+                }
+            }
         }
+        if(orientacao === 2){
+            if (centroX > 0 && centroY < 14) {
+                if(colisao.esquerda(centroY - 1, centroX + 1) && colisao.esquerda(centroY , centroX)){
+                    centroX = centroX -1;
+                    this.mostrar();
+            
+                }
+            }
+    }
 
     };
 
     this.moverDireita = function () {
-        if (centroX < 8 && centroY < 13) {
-            centroX = centroX + 1;
-            this.mostrar();
+        if (orientacao === 1) {
+            if (centroX < 8 && centroY < 13) {
+                if (colisao.direita(centroY, centroX + 1) && colisao.direita(centroY - 1, centroX) && colisao.direita(centroY + 1, centroX + 1)) {
+                    centroX = centroX + 1;
+                    this.mostrar();
+                }
+            }
         }
 
+        if (orientacao === 2) {
+            if (centroX < 8 && centroY < 13) {
+                if (colisao.direita(centroY, centroX + 1) && colisao.direita(centroY - 1, centroX + 2)) {
+                    centroX = centroX + 1;
+                    this.mostrar();
+                }
+            }
+        }
     };
 
     this.moverBaixo = function () {
-        if (centroY < 13) {
-            centroY = centroY + 1;
-            this.mostrar();
+        if (orientacao === 1) {
+            if (centroY < 13) {
+                if (colisao.baixo(centroY, centroX) && colisao.baixo(centroY + 1, centroX + 1)) {
+                    centroY = centroY + 1;
+                    this.mostrar();
+                }
+            }
         }
-
+        if (orientacao === 2) {
+            if (centroY < 14) {
+                if (colisao.baixo(centroY, centroX + 1) && colisao.baixo(centroY - 1, centroX + 2) && colisao.baixo(centroY, centroX)) {
+                    centroY = centroY + 1;
+                    this.mostrar();
+                }
+            }
+        }
     };
 
     this.rodar = function () {
         
         if(orientacao === 1){
-             if(centroY < 13 && centroX < 9 && centroX > 1){
+             if(centroY < 13 && centroX < 8 && centroX >= 0){
                 orientacao = orientacao + 1;
             }
-        }
+        }else
         if(orientacao === 2){
-             if(centroY < 14 && centroX < 8 && centroX > 1){
+             if(centroY < 14 && centroX < 8 && centroX >= 0){
                 orientacao = orientacao + 1;
             }
         }
