@@ -4,44 +4,46 @@
  * and open the template in the editor.
  */
 
-S = function (_coluna, _linha){
-    
-    
-    desenhaS = function(_linha, _coluna, _orientacao, _divs){
+S = function (_coluna, _linha) {
+
+
+    desenhaS = function (_linha, _coluna, _orientacao, _divs) {
         var desenho = [];
-        switch(_orientacao){
-            case 1:
-                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-                desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
-                desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
-                desenho[3] = new Posicao(_linha + 1, _coluna + 1, _divs[3]);
-                break;
-            case 2:
-                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-                desenho[1] = new Posicao(_linha + 1, _coluna, _divs[1]);
-                desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
-                desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
-                break;
-
-
-            case 3:
-                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-                desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
-                desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
-                desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
-                break;
-            case 4:
+        switch (_orientacao) {
+            case 0:
                 desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
                 desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
                 desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                desenho[3] = new Posicao(_linha + 1, _coluna + 1, _divs[3]);
+                break;
+            case 1:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
+                desenho[2] = new Posicao(_linha + 1, _coluna, _divs[2]);
+                desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
+                break;
+
+
+            case 2:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha - 1, _coluna + 1, _divs[1]);
+                desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                desenho[3] = new Posicao(_linha + 1, _coluna, _divs[3]);
+                break;
+            case 3:
+
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
+                desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
                 desenho[3] = new Posicao(_linha - 1, _coluna - 1, _divs[3]);
                 break;
-                    
-        };
-      return desenho;  
+
+        }
+        ;
+        return desenho;
     };
-    
-    
+
+
     var tamanho = 30;
     var cor = "green";
     var div1 = document.createElement("div");
@@ -55,113 +57,124 @@ S = function (_coluna, _linha){
     div2.setAttribute("style", css);
     div3.setAttribute("style", css);
     div4.setAttribute("style", css);
-    
+
     var pai = document.getElementById("tabelaPreview");
     var centroColuna = _coluna;
     var centroLinha = _linha;
-    var orientacao =  Math.floor(Math.random() * 4);
+    var orientacao = Math.floor(Math.random() * 4);
     var posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
     var colisao = new Colisao();
-    
 
-    
+
+
     this.moverEsquerda = function () {
-        
-        switch (orientacao) {
-            case 1:
-                if (colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
-                        colisao.esquerda(posicao[3].linha, posicao[3].coluna) &&
-                        colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
-                    centroColuna = centroColuna - 1;
-                }
-                break;
-            case 2:
-                if (colisao.esquerda(posicao[0].linha, posicao[0].coluna &&
-                        colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
-                    centroColuna = centroColuna - 1;
-                }
-                break;
-
-            case 3:
-                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
-                        colisao.esquerda(posicao[3].linha, posicao[3].coluna) &&
-                        colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
-                    centroColuna = centroColuna - 1;
-                }
-                break;
-            case 4:
-                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna &&
-                        colisao.esquerda(posicao[2].linha, posicao[2].coluna))) {
-                    centroColuna = centroColuna - 1;
-                }
-                break;
+        if (orientacao === 0 || orientacao === 2) {
+            if (colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.esquerda(posicao[3].linha, posicao[3].coluna) &&
+                    colisao.esquerda(posicao[1].linha, posicao[1].coluna)) {
+                centroColuna = centroColuna - 1;
+            }
+        } else if (orientacao === 1 || orientacao === 3) {
+            if (colisao.esquerda(posicao[0].linha, posicao[0].coluna &&
+                    colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
+                centroColuna = centroColuna - 1;
+            }
         }
         posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
     };
 
     this.moverDireita = function () {
-        
-        if (orientacao === 1) {
+
+        if (orientacao === 0 || orientacao === 2) {
             if (colisao.direita(posicao[2].linha, posicao[2].coluna) &&
                     colisao.direita(posicao[1].linha, posicao[1].coluna) &&
                     colisao.direita(posicao[3].linha, posicao[3].coluna)) {
                 centroColuna = centroColuna + 1;
             }
-        } else if (orientacao === 2) {
+        } else if (orientacao === 1 || orientacao === 3) {
             if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
                     colisao.direita(posicao[2].linha, posicao[2].coluna)) {
                 centroColuna = centroColuna + 1;
             }
-        } 
+        }
         posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
     };
 
     this.moverBaixo = function () {
-        
         var moveu = false;
-        if (orientacao === 1) {
-            if (colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
-                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+        switch (orientacao) {
+            case 0:
+                if (colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
-                centroLinha = centroLinha + 1;
-                posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
-                moveu = true;
-            }
-        } else if (orientacao === 2) {
-            if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
-                    colisao.baixo(posicao[2].linha, posicao[2].coluna) &&
-                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+                break;
+            case 1:
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[2].linha, posicao[2].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
-                centroLinha = centroLinha + 1;
-                posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
-                moveu = true;
-            }
-        } 
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+                break;
+            case 2:
+                if (colisao.baixo(posicao[2].linha, posicao[2].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+                break;
+            case 3:
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+                break;
+
+        }
+
         this.mostrar();
         return moveu;
     };
 
     this.rodar = function () {
-        if (orientacao === 1) {
+        if (orientacao === 0 || orientacao === 2) {
             var proximaPosicao = desenhaS(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao++;
                 posicao = proximaPosicao;
             }
-        } else {
-            var proximaPosicao = desenhaS(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
+        } else if (orientacao === 3) {
+            var proximaPosicao = desenhaS(centroLinha, centroColuna, 2, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
-                orientacao = 1;
+                orientacao = 2;
+                posicao = proximaPosicao;
+            }
+        } else {
+            var proximaPosicao = desenhaS(centroLinha, centroColuna, 0, [div1, div2, div3, div4]);
+            if (colisao.proxima(posicao, proximaPosicao)) {
+                orientacao = 0;
                 posicao = proximaPosicao;
             }
         }
         this.mostrar();
     };
-    
+
     this.mostrar = function () {
-          var celulas = pai.getElementsByTagName("td");
+        var celulas = pai.getElementsByTagName("td");
         for (var i = 0; i < 4; i++) {
             var celula = (posicao[i].coluna + posicao[i].linha * 10);
             if (posicao[i].div.parentNode) {
@@ -170,11 +183,11 @@ S = function (_coluna, _linha){
             if (celula >= 0) {
                 celulas[celula].appendChild(posicao[i].div);
             }
-        }    
+        }
     };
     this.posiciona = function () {
         centroColuna = 4;
-        centroLinha = -2;
+        centroLinha = -1;
         posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         pai = document.getElementById("tabelaPrincipal");
     };

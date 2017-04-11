@@ -21,6 +21,12 @@ I = function (_coluna, _linha) {
                 desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
                 desenho[3] = new Posicao(_linha, _coluna + 2, _divs[3]);
                 break;
+            case 3:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna - 2, _divs[1]);
+                desenho[2] = new Posicao(_linha, _coluna - 1, _divs[2]);
+                desenho[3] = new Posicao(_linha, _coluna + 1, _divs[3]);
+                break;
         }
         return desenho;
     };
@@ -56,7 +62,7 @@ I = function (_coluna, _linha) {
                     && colisao.esquerda(posicao[2].linha, posicao[2].coluna) && colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
                 centroColuna = centroColuna - 1;
             }
-        } else if (orientacao === 2) {
+        } else if (orientacao === 2 || orientacao === 3) {
             if (colisao.esquerda(posicao[1].linha, posicao[1].coluna)) {
                 centroColuna = centroColuna - 1;
             }
@@ -72,7 +78,7 @@ I = function (_coluna, _linha) {
                 centroColuna = centroColuna + 1;
             }
 
-        } else if (orientacao === 2) {
+        } else if (orientacao === 2 || orientacao === 3) {
             if (colisao.direita(posicao[3].linha, posicao[3].coluna)) {
                 centroColuna = centroColuna + 1;
             }
@@ -94,7 +100,7 @@ I = function (_coluna, _linha) {
                 moveu = true;
             }
 
-        } else if (orientacao === 2) {
+        } else if (orientacao === 2 || orientacao === 3) {
 
             if (colisao.baixo(posicao[0].linha, posicao[0].coluna) && colisao.baixo(posicao[1].linha, posicao[1].coluna)
                     && colisao.baixo(posicao[2].linha, posicao[2].coluna) && colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
@@ -128,22 +134,25 @@ I = function (_coluna, _linha) {
     };
 
     this.rodar = function () {
+        var proximaPosicao;
         if (orientacao === 1) {
-            var proximaPosicao = desenhaI(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
+            proximaPosicao = desenhaI(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao++;
                 posicao = proximaPosicao;
+            } else {
+                proximaPosicao = desenhaI(centroLinha, centroColuna, 3, [div1, div2, div3, div4]);
+                if (colisao.proxima(posicao, proximaPosicao)) {
+                    orientacao = 3;
+                    posicao = proximaPosicao;
+                }
             }
-
-
         } else {
-            var proximaPosicao = desenhaI(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
+            proximaPosicao = desenhaI(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
             if (colisao.proxima(posicao, proximaPosicao)) {
                 orientacao = 1;
                 posicao = proximaPosicao;
             }
-
-
         }
         this.mostrar();
 
