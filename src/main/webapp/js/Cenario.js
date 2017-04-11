@@ -51,8 +51,28 @@ Cenario = function () {
     sorteio = function () {
         var sorteado = Math.floor(Math.random() * 4);
         console.log(sorteado);
-        var tetraminos = [new Quadrado(4, 4), new T(4, 4), new L(4, 4), new S(4, 4)];
-        return tetraminos[sorteado];
+        var tetraminos;
+        
+        switch(sorteado){
+            
+            case 1: 
+                tetraminos = new S(4,4);
+                break;
+                
+            case 2: 
+                tetraminos = new S(4,4);
+                break;
+                
+            case 3: 
+                tetraminos = new L(4,4);
+                break;
+                
+            case 4: 
+                tetraminos = new S(4,4);
+                break;
+        }
+        return tetraminos;
+        
     };
 
     this.preview = function (_tetramino) {
