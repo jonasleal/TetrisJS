@@ -4,22 +4,22 @@
  * and open the template in the editor.
  */
 I = function (_coluna, _linha) {
-    desenhaI = function (_coluna, _linha, _orientacao, _divs) {
+    desenhaI = function (_linha, _coluna, _orientacao, _divs) {
         var desenho = [];
 
         switch (_orientacao) {
             case 1:
-                desenho[0] = new Posicao(_coluna, _linha, _divs[0]);
-                desenho[1] = new Posicao(_coluna, _linha - 1, _divs[1]);
-                desenho[2] = new Posicao(_coluna, _linha + 1, _divs[2]);
-                desenho[3] = new Posicao(_coluna, _linha + 2, _divs[3]);
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
+                desenho[2] = new Posicao(_linha + 1, _coluna, _divs[2]);
+                desenho[3] = new Posicao(_linha + 2, _coluna, _divs[3]);
                 break;
 
             case 2:
-                desenho[0] = new Posicao(_coluna, _linha, _divs[0]);
-                desenho[1] = new Posicao(_coluna - 1, _linha, _divs[1]);
-                desenho[2] = new Posicao(_coluna + 1, _linha, _divs[2]);
-                desenho[3] = new Posicao(_coluna + 2, _linha, _divs[3]);
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
+                desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                desenho[3] = new Posicao(_linha, _coluna + 2, _divs[3]);
                 break;
         }
         return desenho;
@@ -116,7 +116,7 @@ I = function (_coluna, _linha) {
     this.mostrar = function () {
         var celulas = pai.getElementsByTagName("td");
         for (i = 0; i < 4; i++) {
-            var celula = (posicao[i].coluna + posicao[i].linha * 10);
+            var celula = posicao[i].coluna + (posicao[i].linha * 10);
             if (posicao[i].div.parentNode) {
                 posicao[i].div.parentNode.removeChild(posicao[i].div);
             }

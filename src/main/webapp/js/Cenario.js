@@ -31,13 +31,14 @@ Cenario = function () {
 
     contarTempo = function () {
         s++;
-        if(s === 60){
+        if (s === 60) {
             m++;
-            s=0;
-        };
-        if(m === 60){
+            s = 0;
+        }
+        ;
+        if (m === 60) {
             h++;
-            m=0;
+            m = 0;
         }
         nodeTempo.data = h + ":" + m + ":" + s;
     };
@@ -51,8 +52,26 @@ Cenario = function () {
     sorteio = function () {
         var sorteado = Math.floor(Math.random() * 5);
         console.log(sorteado);
-        var tetraminos = [new Quadrado(4, 4), new T(4, 4), new L(4, 4), new S(4, 4),new I( 4, 4)];
-        return tetraminos[sorteado];
+        var escolhido;
+        switch (sorteado) {
+            case 0:
+                escolhido = new Quadrado(4, 4);
+                break;
+            case 1:
+                escolhido = new T(4, 4);
+                break;
+            case 2:
+                escolhido = new L(4, 4);
+                break;
+            case 3:
+                escolhido = new I(4, 4);
+                break;
+            case 4:
+                escolhido = new S(4, 4);
+                break;
+
+        }
+        return escolhido;
     };
 
     this.preview = function (_tetramino) {
