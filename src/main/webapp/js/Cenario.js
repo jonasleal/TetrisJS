@@ -70,8 +70,9 @@ Cenario = function () {
                 escolhido = new S(4, 4);
                 break;
 
-        }
+        };
         return escolhido;
+
     };
 
     this.preview = function (_tetramino) {

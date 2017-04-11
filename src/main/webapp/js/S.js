@@ -6,9 +6,10 @@
 
 S = function (_coluna, _linha){
     
+    
     desenhaS = function(_linha, _coluna, _orientacao, _divs){
         var desenho = [];
-        switch (_orientacao) {
+        switch(_orientacao){
             case 1:
                 desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
                 desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
@@ -21,6 +22,21 @@ S = function (_coluna, _linha){
                 desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
                 desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
                 break;
+
+
+            case 3:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
+                desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
+                desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
+                break;
+            case 4:
+                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
+                desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                desenho[3] = new Posicao(_linha - 1, _coluna - 1, _divs[3]);
+                break;
+                    
         };
       return desenho;  
     };
@@ -43,7 +59,7 @@ S = function (_coluna, _linha){
     var pai = document.getElementById("tabelaPreview");
     var centroColuna = _coluna;
     var centroLinha = _linha;
-    var orientacao = 1;
+    var orientacao =  Math.floor(Math.random() * 4);
     var posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
     var colisao = new Colisao();
     
@@ -51,17 +67,34 @@ S = function (_coluna, _linha){
     
     this.moverEsquerda = function () {
         
-        if (orientacao === 1) {
-            if (colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
-                    colisao.esquerda(posicao[3].linha, posicao[3].coluna) &&
-                    colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
-                centroColuna = centroColuna - 1;
-            }
-        } else if (orientacao === 2) {
-            if (colisao.esquerda(posicao[0].linha, posicao[0].coluna &&
-                    colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
-                centroColuna = centroColuna - 1;
-            }
+        switch (orientacao) {
+            case 1:
+                if (colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna) &&
+                        colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
+                break;
+            case 2:
+                if (colisao.esquerda(posicao[0].linha, posicao[0].coluna &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
+                    centroColuna = centroColuna - 1;
+                }
+                break;
+
+            case 3:
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna) &&
+                        colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
+                break;
+            case 4:
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna &&
+                        colisao.esquerda(posicao[2].linha, posicao[2].coluna))) {
+                    centroColuna = centroColuna - 1;
+                }
+                break;
         }
         posicao = desenhaS(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
