@@ -3,16 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-I = function (coluna, linha) {
-    var posicao = [];
-    var centroX = coluna;
-    var centroY = linha;
+I = function (_coluna, _linha) {
+    desenhaI = function (_coluna, _linha, _orientacao, _divs) {
+        var desenho = [];
+
+        switch (_orientacao) {
+            case 1:
+                desenho[0] = new Posicao(_coluna, _linha, _divs[0]);
+                desenho[1] = new Posicao(_coluna, _linha - 1, _divs[1]);
+                desenho[2] = new Posicao(_coluna, _linha + 1, _divs[2]);
+                desenho[3] = new Posicao(_coluna, _linha + 2, _divs[3]);
+                break;
+
+            case 2:
+                desenho[0] = new Posicao(_coluna, _linha, _divs[0]);
+                desenho[1] = new Posicao(_coluna - 1, _linha, _divs[1]);
+                desenho[2] = new Posicao(_coluna + 1, _linha, _divs[2]);
+                desenho[3] = new Posicao(_coluna + 2, _linha, _divs[3]);
+                break;
+        }
+        return desenho;
+    };
+
     var tamanho = 30;
     var cor = "aqua";
-    var orientacao = 1;
-    var colisao = new Colisao();
-
-
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
     var div3 = document.createElement("div");
@@ -25,18 +39,87 @@ I = function (coluna, linha) {
     div3.setAttribute("style", css);
     div4.setAttribute("style", css);
 
+    var pai = document.getElementById("tabelaPreview");
+    var centroColuna = _coluna;
+    var centroLinha = _linha;
+    var orientacao = 1;
+    var posicao = desenhaI(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
 
-    posicao[0] = new Posicao(linha, coluna, div1);
-    posicao[1] = new Posicao(posicao[0].linha, posicao[0].coluna - 1, div2);
-    posicao[2] = new Posicao(posicao[0].linha, posicao[0].coluna + 1, div3);
-    posicao[3] = new Posicao(posicao[0].linha, posicao[0].coluna + 2, div4);
+
+
+    var colisao = new Colisao();
+
+    this.moverEsquerda = function () {
+
+        if (orientacao === 1) {
+            if (colisao.esquerda(posicao[0].linha, posicao[0].coluna) && colisao.esquerda(posicao[1].linha, posicao[1].coluna)
+                    && colisao.esquerda(posicao[2].linha, posicao[2].coluna) && colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna - 1;
+            }
+        } else if (orientacao === 2) {
+            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna)) {
+                centroColuna = centroColuna - 1;
+            }
+        }
+        posicao = desenhaI(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        this.mostrar();
+    };
+
+    this.moverDireita = function () {
+        if (orientacao === 1) {
+            if (colisao.direita(posicao[0].linha, posicao[0].coluna) && colisao.direita(posicao[1].linha, posicao[1].coluna)
+                    && colisao.direita(posicao[2].linha, posicao[2].coluna) && colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna + 1;
+            }
+
+        } else if (orientacao === 2) {
+            if (colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                centroColuna = centroColuna + 1;
+            }
+
+        }
+
+        posicao = desenhaI(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        this.mostrar();
+    };
+
+    this.moverBaixo = function () {
+        var moveu = false;
+
+        if (orientacao === 1) {
+
+            if (colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+                centroLinha = centroLinha + 1;
+                posicao = desenhaI(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                moveu = true;
+            }
+
+        } else if (orientacao === 2) {
+
+            if (colisao.baixo(posicao[0].linha, posicao[0].coluna) && colisao.baixo(posicao[1].linha, posicao[1].coluna)
+                    && colisao.baixo(posicao[2].linha, posicao[2].coluna) && colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                centroLinha = centroLinha + 1;
+                posicao = desenhaI(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                moveu = true;
+
+            }
+        }
+        this.mostrar();
+        return moveu;
+
+
+    };
+
+
 
     this.mostrar = function () {
-        var tabela = document.getElementById("tabelaPrincipal");
-        var celulas = tabela.getElementsByTagName("td");
-
-        for (var i = 0; i < 4; i++) {
+        var celulas = pai.getElementsByTagName("td");
+        for (i = 0; i < 4; i++) {
             var celula = (posicao[i].coluna + posicao[i].linha * 10);
+            if (posicao[i].div.parentNode) {
+                posicao[i].div.parentNode.removeChild(posicao[i].div);
+            }
             if (celula >= 0) {
                 celulas[celula].appendChild(posicao[i].div);
             }
@@ -44,96 +127,34 @@ I = function (coluna, linha) {
 
     };
 
-    this.moverEsquerda = function () {
-        if (orientacao === 1) {
-
-            if (colisao.esquerda(centroY, (centroX - 1))) {
-                centroX = centroX - 1;
-            }
-
-
-            this.mostrar();
-
-
-        } else if (orientacao === 2) {
-
-
-            if (colisao.esquerda(centroY - 1, centroX) && colisao.esquerda(centroY, centroX) && colisao.esquerda(centroY + 1, centroX)
-                    && colisao.esquerda(centroY + 2, centroX)) {
-                centroX = centroX - 1;
-            }
-            this.mostrar();
-        }
-    };
-
-    this.moverDireita = function () {
-
-        if (orientacao === 1) {
-            //if (centroX < 7 && centroY < 14) {
-
-            if (colisao.direita(centroY, centroX + 2)) {
-
-                centroX = centroX + 1;
-
-            }
-
-            this.mostrar();
-
-        } else if (orientacao === 2) {
-            //if (centroX < 9 && centroY < 12) {
-
-            if (colisao.direita(centroY - 1, centroX) && colisao.direita(centroY, centroX) && colisao.direita(centroY + 1, centroX) &&
-                    colisao.direita(centroY + 2, centroX)) {
-                centroX = centroX + 1;
-            }
-            this.mostrar();
-
-
-        }
-    };
-
-    this.moverBaixo = function () {
-        if (orientacao === 1) {
-            //if (centroY < 14) {
-
-            if (colisao.baixo(centroY, centroX - 1) && colisao.baixo(centroY, centroX) && colisao.baixo(centroY, centroX + 1) &&
-                    colisao.baixo(centroY, centroX + 2)) {
-                centroY = centroY + 1;
-                this.mostrar();
-                return true;
-
-            }
-
-
-        }
-
-        if (orientacao === 2) {
-            //if (centroY < 12) {
-
-            if (colisao.baixo(centroY + 2, centroX)) {
-                centroY = centroY + 1;
-                this.mostrar();
-                return true;
-            }
-            return false;
-        }
-
-
-
-
-    };
-
     this.rodar = function () {
+        if (orientacao === 1) {
+            var proximaPosicao = desenhaI(centroLinha, centroColuna, orientacao + 1, [div1, div2, div3, div4]);
+            if (colisao.proxima(posicao, proximaPosicao)) {
+                orientacao++;
+                posicao = proximaPosicao;
+            }
 
-        r = new Rotacao();
-        posicao = r.horaria(posicao[0], posicao[1], posicao[2], posicao[3]);
+
+        } else {
+            var proximaPosicao = desenhaI(centroLinha, centroColuna, 1, [div1, div2, div3, div4]);
+            if (colisao.proxima(posicao, proximaPosicao)) {
+                orientacao = 1;
+                posicao = proximaPosicao;
+            }
+
+
+        }
         this.mostrar();
-    };
-
-
-    this.posiciona = function (coluna, linha) {
-        centroX = coluna;
-        centroY = linha;
 
     };
+
+    this.posiciona = function () {
+        centroColuna = 4;
+        centroLinha = -2;
+        posicao = desenhaI(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+        pai = document.getElementById("tabelaPrincipal");
+
+    };
+
 };
