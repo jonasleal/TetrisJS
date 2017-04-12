@@ -4,41 +4,71 @@
  * and open the template in the editor.
  */
 L = function (_coluna, _linha) {
-
+    
     desenhaL = function (_linha, _coluna, _orientacao, _divs) {
         var desenho = [];
-        switch (_orientacao) {
-            case 1:
-                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-                desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
-                desenho[2] = new Posicao(_linha + 1, _coluna, _divs[2]);
-                desenho[3] = new Posicao(_linha + 1, _coluna + 1, _divs[3]);
-                break;
-            case 2:
-                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-                desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
-                desenho[2] = new Posicao(_linha, _coluna - 1, _divs[2]);
-                desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
-                break;
-            case 3:
-                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-                desenho[1] = new Posicao(_linha + 1, _coluna, _divs[1]);
-                desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
-                desenho[3] = new Posicao(_linha - 1, _coluna - 1, _divs[3]);
-                break;
-            case 4:
-                desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
-                desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
-                desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
-                desenho[3] = new Posicao(_linha - 1, _coluna + 1, _divs[3]);
-                break;
+        
+        if(sorteaPeca === 0){
+            switch (_orientacao) {
+                case 1:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
+                    desenho[2] = new Posicao(_linha + 1, _coluna, _divs[2]);
+                    desenho[3] = new Posicao(_linha + 1, _coluna + 1, _divs[3]);
+                    break;
+                case 2:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
+                    desenho[2] = new Posicao(_linha, _coluna - 1, _divs[2]);
+                    desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
+                    break;
+                case 3:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha + 1, _coluna, _divs[1]);
+                    desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
+                    desenho[3] = new Posicao(_linha - 1, _coluna - 1, _divs[3]);
+                    break;
+                case 4:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
+                    desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                    desenho[3] = new Posicao(_linha - 1, _coluna + 1, _divs[3]);
+                    break;
+            };
+        }else if(sorteaPeca === 1){
+            switch (_orientacao) {
+                case 1:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha - 1, _coluna, _divs[1]);
+                    desenho[2] = new Posicao(_linha + 1, _coluna, _divs[2]);
+                    desenho[3] = new Posicao(_linha + 1, _coluna - 1, _divs[3]);
+                    break;
+                case 2:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha, _coluna + 1, _divs[1]);
+                    desenho[2] = new Posicao(_linha, _coluna - 1, _divs[2]);
+                    desenho[3] = new Posicao(_linha - 1, _coluna - 1, _divs[3]);
+                    break;
+                case 3:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha + 1, _coluna, _divs[1]);
+                    desenho[2] = new Posicao(_linha - 1, _coluna, _divs[2]);
+                    desenho[3] = new Posicao(_linha - 1, _coluna + 1, _divs[3]);
+                    break;
+                case 4:
+                    desenho[0] = new Posicao(_linha, _coluna, _divs[0]);
+                    desenho[1] = new Posicao(_linha, _coluna - 1, _divs[1]);
+                    desenho[2] = new Posicao(_linha, _coluna + 1, _divs[2]);
+                    desenho[3] = new Posicao(_linha + 1, _coluna + 1, _divs[3]);
+                    break;
+            };
         }
-        ;
         return desenho;
     };
 //Aparencia
     var tamanho = 30;
     var cor = "orange";
+    var sorteaPeca = Math.floor(Math.random() * 2);
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
     var div3 = document.createElement("div");
@@ -67,28 +97,55 @@ L = function (_coluna, _linha) {
     this.moverEsquerda = function () {
 //        Verifica se o caminho esta livre para as peças da esquerda
 //        de acordo com a orientação atual do tetraminó
-        if (orientacao === 1) {
-            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
-                    colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
-                    colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
-                centroColuna = centroColuna - 1;
+        if (sorteaPeca === 0) {
+            if (orientacao === 1) {
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
+            } else if (orientacao === 2) {
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna &&
+                        colisao.esquerda(posicao[2].linha, posicao[2].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
+                    centroColuna = centroColuna - 1;
+                }
+            } else if (orientacao === 3) {
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
+            } else if (orientacao === 4) {
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
             }
-        } else if (orientacao === 2) {
-            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna &&
-                    colisao.esquerda(posicao[2].linha, posicao[2].coluna) &&
-                    colisao.esquerda(posicao[3].linha, posicao[3].coluna))) {
-                centroColuna = centroColuna - 1;
-            }
-        } else if (orientacao === 3) {
-            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
-                    colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
-                    colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
-                centroColuna = centroColuna - 1;
-            }
-        } else if (orientacao === 4) {
-            if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
-                    colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
-                centroColuna = centroColuna - 1;
+        }
+        else if (sorteaPeca === 1){
+            if (orientacao === 1) {
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
+            } else if (orientacao === 2) {
+                if (colisao.esquerda(posicao[2].linha, posicao[2].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
+            } else if (orientacao === 3) {
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.esquerda(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.esquerda(posicao[2].linha, posicao[2].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
+            } else if (orientacao === 4) {
+                if (colisao.esquerda(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.esquerda(posicao[3].linha, posicao[3].coluna)) {
+                    centroColuna = centroColuna - 1;
+                }
             }
         }
         posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
@@ -98,28 +155,56 @@ L = function (_coluna, _linha) {
     this.moverDireita = function () {
 //        Verifica se o caminho esta livre para as peças da direita
 //        de acordo com a orientação atual do tetraminó
-        if (orientacao === 1) {
-            if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+        if (sorteaPeca === 0) {
+            if (orientacao === 1) {
+                if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
                     colisao.direita(posicao[0].linha, posicao[0].coluna) &&
                     colisao.direita(posicao[3].linha, posicao[3].coluna)) {
-                centroColuna = centroColuna + 1;
-            }
-        } else if (orientacao === 2) {
-            if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                        centroColuna = centroColuna + 1;
+                }
+            } else if (orientacao === 2) {
+                if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
                     colisao.direita(posicao[3].linha, posicao[3].coluna)) {
-                centroColuna = centroColuna + 1;
-            }
-        } else if (orientacao === 3) {
-            if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                        centroColuna = centroColuna + 1;
+                }
+            } else if (orientacao === 3) {
+                if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
                     colisao.direita(posicao[0].linha, posicao[0].coluna) &&
                     colisao.direita(posicao[2].linha, posicao[2].coluna)) {
-                centroColuna = centroColuna + 1;
-            }
-        } else if (orientacao === 4) {
-            if (colisao.direita(posicao[2].linha, posicao[2].coluna) &&
+                        centroColuna = centroColuna + 1;
+                }
+            } else if (orientacao === 4) {
+                if (colisao.direita(posicao[2].linha, posicao[2].coluna) &&
                     colisao.direita(posicao[3].linha, posicao[3].coluna)) {
-                centroColuna = centroColuna + 1;
+                        centroColuna = centroColuna + 1;
+                }
             }
+        } 
+        else if (sorteaPeca === 1){
+            
+            if (orientacao === 1) {
+                if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.direita(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.direita(posicao[2].linha, posicao[2].coluna)) {
+                        centroColuna = centroColuna + 1;
+                }
+            } else if (orientacao === 2) {
+                if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                        centroColuna = centroColuna + 1;
+                }
+            } else if (orientacao === 3) {
+                if (colisao.direita(posicao[1].linha, posicao[1].coluna) &&
+                    colisao.direita(posicao[0].linha, posicao[0].coluna) &&
+                    colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                        centroColuna = centroColuna + 1;
+                }
+            } else if (orientacao === 4) {
+                if (colisao.direita(posicao[2].linha, posicao[2].coluna) &&
+                    colisao.direita(posicao[3].linha, posicao[3].coluna)) {
+                        centroColuna = centroColuna + 1;
+                }
+            }    
         }
         posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
         this.mostrar();
@@ -131,38 +216,76 @@ L = function (_coluna, _linha) {
 //        houver movimento e false caso na haja possibilidade
 
         var moveu = false;
-        if (orientacao === 1) {
-            if (colisao.baixo(posicao[2].linha, posicao[2].coluna) &&
-                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+        if (sorteaPeca === 0) {
+            if (orientacao === 1) {
+                if (colisao.baixo(posicao[2].linha, posicao[2].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
-                centroLinha = centroLinha + 1;
-                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
-                moveu = true;
-            }
-        } else if (orientacao === 2) {
-            if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
-                    colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
-                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+            } else if (orientacao === 2) {
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
-                centroLinha = centroLinha + 1;
-                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
-                moveu = true;
-            }
-        } else if (orientacao === 3) {
-            if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
-                    colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+            } else if (orientacao === 3) {
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
 
-                centroLinha = centroLinha + 1;
-                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
-                moveu = true;
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+            } else if (orientacao === 4) {
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.baixo(posicao[2].linha, posicao[2].coluna)) {
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
             }
-        } else if (orientacao === 4) {
-            if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
-                    colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
-                    colisao.baixo(posicao[2].linha, posicao[2].coluna)) {
-                centroLinha = centroLinha + 1;
-                posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
-                moveu = true;
+        } else if (sorteaPeca === 1) {
+
+            if (orientacao === 1) {
+                if (colisao.baixo(posicao[2].linha, posicao[2].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+            } else if (orientacao === 2) {
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.baixo(posicao[2].linha, posicao[2].coluna)) {
+
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+            } else if (orientacao === 3) {
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
+            } else if (orientacao === 4) {
+                if (colisao.baixo(posicao[1].linha, posicao[1].coluna) &&
+                        colisao.baixo(posicao[0].linha, posicao[0].coluna) &&
+                        colisao.baixo(posicao[3].linha, posicao[3].coluna)) {
+                    centroLinha = centroLinha + 1;
+                    posicao = desenhaL(centroLinha, centroColuna, orientacao, [div1, div2, div3, div4]);
+                    moveu = true;
+                }
             }
         }
         this.mostrar();
